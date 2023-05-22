@@ -1,0 +1,103 @@
+﻿<Window x:Class="MarketPlacePraktuka.Pages.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MarketPlacePraktuka"
+        mc:Ignorable="d" WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Title="MainWindow" Height="480" Width="488" WindowStartupLocation="CenterScreen" >
+
+    <Border CornerRadius="25" BorderThickness="5" Background="#FF101126">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="81*"/>
+                <ColumnDefinition Width="346*"/>
+                <ColumnDefinition Width="81*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27*"/>
+                <RowDefinition Height="88*"/>
+                <RowDefinition Height="43*"/>
+                <RowDefinition Height="34*"/>
+                <RowDefinition Height="43*"/>
+                <RowDefinition Height="69*"/>
+                <RowDefinition Height="44*"/>
+                <RowDefinition Height="44*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" CornerRadius="25 25 0 0" Background="#FF251F45" MouseDown="ToolBar_MouseDown" Grid.ColumnSpan="3" Margin="0,0,0,88" Grid.RowSpan="2"  >
+
+                <Grid  Name="ToolBar"  >
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="418,0,0,0">
+                        <Image Name="MinBut"  Height="13" Width="25" MouseDown="MinBut_MouseDown" >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="../Source/Черта Не активный.png"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinBut}" Value="true">
+                                            <Setter Property="Source" Value="../Source/Черта активный.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+
+                        <Image Name="MinBut2"  Height="13" Width="25" MouseDown="MinBut2_MouseDown" >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="../Source/Крест Не активный.png"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinBut2}" Value="true">
+                                            <Setter Property="Source" Value="../Source/Крест  активный.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <TextBox  x:Name="LoginTb"  Foreground="white"  Grid.Row="2"  Grid.Column="1"  BorderBrush="Transparent"  FontSize="18" VerticalAlignment="Center" Margin="5,0,5,0"   />
+
+            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Логин"  Foreground="White" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0" >
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=LoginTb}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <TextBox  x:Name="PasswordTb"  Foreground="white" Grid.Row="4" Background="Transparent" Grid.Column="1"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0"   />
+
+
+            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Пароль"  Foreground="White" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=PasswordTb}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Button Content="Авторизоваться" x:Name="Avtor" FontSize="20" Background="Transparent" Grid.Row="6" Grid.Column="1" Click="Avtor_Click" />
+            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="7" Grid.Column="1" Click="Reg_Click"  />
+
+
+        </Grid>
+    </Border>
+
+</Window>
