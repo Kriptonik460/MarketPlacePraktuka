@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type Border}" x:Key="RainbowBorderStyle">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].(GradientStop.Color)" RepeatBehavior="Forever">
+                            <DiscreteColorKeyFrame KeyTime="0" Value="#FF0000"/>
+                            <DiscreteColorKeyFrame KeyTime="0:0:0.25" Value="#FF7F00"/>
+                            <DiscreteColorKeyFrame KeyTime="0:0:0.5" Value="#FFFF00"/>
+                            <DiscreteColorKeyFrame KeyTime="0:0:0.75" Value="#00FF00"/>
+                            <DiscreteColorKeyFrame KeyTime="0:0:1" Value="#0000FF"/>
+                            <DiscreteColorKeyFrame KeyTime="0:0:1.25" Value="#4B0082"/>
+                            <DiscreteColorKeyFrame KeyTime="0:0:1.5" Value="#8F00FF"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

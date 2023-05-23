@@ -4,9 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.Salesman"
-        mc:Ignorable="d"
-        Title="MainPageSalesman" Height="450" Width="800" Background="Aqua">
-    <Grid>
+        mc:Ignorable="d" WindowStyle="None"  AllowsTransparency="True"
+        Title="MainPageSalesman" Height="555" Width="984" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="NoResize" ShowInTaskbar="False" Background="Transparent" BorderBrush="#FF000000"
+        BorderThickness="10">
+    <Window.Resources>
+        <Storyboard x:Key="RainbowStoryboard">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF00FFFF"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFFF00FF"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="#FFFFFF00"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.5" Value="#FF00FF00"/>
+                <EasingColorKeyFrame KeyTime="0:0:2" Value="#FF0000FF"/>
+                <EasingColorKeyFrame KeyTime="0:0:2.5" Value="#FFFF0000"/>
+                <EasingColorKeyFrame KeyTime="0:0:3" Value="#FFFFFFFF"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <GradientStopCollection x:Key="RainbowGradientStops">
+            <GradientStop Offset="0" Color="#FF00FFFF"/>
+            <GradientStop Offset="0.1666" Color="#FFFF00FF"/>
+            <GradientStop Offset="0.3333" Color="#FFFFFF00"/>
+            <GradientStop Offset="0.5" Color="#FF00FF00"/>
+            <GradientStop Offset="0.6666" Color="#FF0000FF"/>
+            <GradientStop Offset="0.8333" Color="#FFFF0000"/>
+            <GradientStop Offset="1" Color="#FFFFFFFF"/>
+        </GradientStopCollection>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
+        </EventTrigger>
+    </Window.Triggers>
+    <Border x:Name="border" BorderThickness="20">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
+        </Border.BorderBrush>
         
-    </Grid>
+        <Grid Background="#FF101126">
+            <!-- Put your content here -->
+        </Grid>
+    </Border>
+
 </Window>

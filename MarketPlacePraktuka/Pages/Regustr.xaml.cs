@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MarketPlacePraktuka.Models;
+using MarketPlacePraktuka.Pages;
 
 namespace MarketPlacePraktuka.Pages
 {
@@ -22,8 +23,9 @@ namespace MarketPlacePraktuka.Pages
     /// </summary>
     public partial class Regustr : Window
     {
-        Client client;
-        Salesman salesman;
+        MarketPlacePraktuka.Models.Client client;
+
+        MarketPlacePraktuka.Models.Salesman salesman;
         User user;
         
         public Regustr()
@@ -81,7 +83,7 @@ namespace MarketPlacePraktuka.Pages
                     Password = PasswordTb.Text.Trim()
                 };
                 App.DB.User.Add(user);
-                client = new Client()
+                client = new MarketPlacePraktuka.Models.Client()
                 {
                     Name = NameTb.Text.Trim(),
                     Surname = FamTb.Text.Trim(),
@@ -111,7 +113,7 @@ namespace MarketPlacePraktuka.Pages
                     Password = PasswordTb.Text.Trim()
                 };
                 App.DB.User.Add(user);
-                salesman = new Salesman()
+                salesman = new MarketPlacePraktuka.Models.Salesman()
                 {
                     Username = NameTb.Text.Trim(),
                     ID_User = user.ID
