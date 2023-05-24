@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1345afacdd6c4dae86e354e4f6ae8369" Name="Diagram1">
+      <Diagram DiagramId="083df096e3644c27b42f24447a5a1e82" Name="Diagram1">
         <EntityTypeShape EntityType="MarketPlaceModel.Address" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketPlaceModel.Basket" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="MarketPlaceModel.ProductList" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketPlaceModel.Salesman" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketPlaceModel.Status" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="MarketPlaceModel.FK_Order_Address" ManuallyRouted="false" />
         <AssociationConnector Association="MarketPlaceModel.FK_Basket_Client" ManuallyRouted="false" />

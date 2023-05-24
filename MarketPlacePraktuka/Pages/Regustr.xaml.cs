@@ -115,7 +115,7 @@ namespace MarketPlacePraktuka.Pages
                 App.DB.User.Add(user);
                 salesman = new MarketPlacePraktuka.Models.Salesman()
                 {
-                    Username = NameTb.Text.Trim(),
+                    NameCompany = NameTb.Text.Trim(),
                     ID_User = user.ID
                 };
                 App.DB.Salesman.Add(salesman);

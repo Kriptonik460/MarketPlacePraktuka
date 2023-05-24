@@ -156,9 +156,9 @@
                     <TextBlock Text="Продавец" FontSize="20"/>
                 </ComboBoxItem>
             </ComboBox>
-            
-            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="13" Grid.Column="1" Click="Reg_Click"   />
-            <Button Content="Вернуться" x:Name="Back" FontSize="20" Background="Transparent" Grid.Row="0" Grid.Column="1" Click="Back_Click"   />
+
+            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="13" Grid.Column="1" Click="Reg_Click" Style="{DynamicResource BTNSTL}"  />
+            <Button Content="Вернуться" x:Name="Back" FontSize="20" Background="Transparent" Grid.Row="0" Grid.Column="1" Click="Back_Click" Style="{DynamicResource BTNSTL}"  />
 
 
         </Grid>

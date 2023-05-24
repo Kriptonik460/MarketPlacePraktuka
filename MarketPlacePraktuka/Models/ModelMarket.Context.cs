@@ -36,7 +36,6 @@ namespace MarketPlacePraktuka.Models
         public virtual DbSet<ProductList> ProductList { get; set; }
         public virtual DbSet<Salesman> Salesman { get; set; }
         public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

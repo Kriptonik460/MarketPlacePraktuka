@@ -27,6 +27,8 @@ namespace MarketPlacePraktuka.Pages
         public MainWindow()
         {
             InitializeComponent();
+           
+            
         }
         #region Функционал сверху
         private void MinBut2_MouseDown(object sender, MouseButtonEventArgs e)

@@ -93,8 +93,8 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button Content="Авторизоваться" x:Name="Avtor" FontSize="20" Background="Transparent" Grid.Row="6" Grid.Column="1" Click="Avtor_Click" />
-            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="7" Grid.Column="1" Click="Reg_Click"  />
+            <Button Content="Авторизоваться" x:Name="Avtor" FontSize="20" Background="Transparent" Grid.Row="6" Grid.Column="1" Click="Avtor_Click" Style="{DynamicResource BTNSTL}" />
+            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="7" Grid.Column="1" Click="Reg_Click" Style="{DynamicResource BTNSTL}" />
 
 
         </Grid>

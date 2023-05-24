@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.Salesman"
+        xmlns:fa ="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d" WindowStyle="None"  AllowsTransparency="True"
-        Title="MainPageSalesman" Height="555" Width="984" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="NoResize" ShowInTaskbar="False" Background="Transparent" BorderBrush="#FF000000"
-        BorderThickness="10">
-    <Window.Resources>
+        Title="MainPageSalesman" Height="555" Width="984" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="NoResize"  Background="Transparent" BorderBrush="Transparent"
+        >
+    <!--<Window.Resources>
         <Storyboard x:Key="RainbowStoryboard">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border" RepeatBehavior="Forever">
                 <EasingColorKeyFrame KeyTime="0" Value="#FF00FFFF"/>
                 <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFFF00FF"/>
                 <EasingColorKeyFrame KeyTime="0:0:1" Value="#FFFFFF00"/>
@@ -33,14 +34,79 @@
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
         </EventTrigger>
-    </Window.Triggers>
-    <Border x:Name="border" BorderThickness="20">
-        <Border.BorderBrush>
+    </Window.Triggers>-->
+    <Border x:Name="border"  CornerRadius="25 25 0 0 " Background="#FF101126">
+        <!--<Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
-        </Border.BorderBrush>
-        
-        <Grid Background="#FF101126">
-            <!-- Put your content here -->
+        </Border.BorderBrush>-->
+
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border  CornerRadius="25 25 0 0" Background="#FF251F45" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
+                    <Image Name="MinBut"  Height="13" Width="25" MouseDown="MinBut_MouseDown" >
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="../../Source/Черта Не активный.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinBut}" Value="true">
+                                        <Setter Property="Source" Value="../../Source/Черта активный.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                    <Image Name="MinBut2"  Height="13" Width="25" MouseDown="MinBut2_MouseDown" >
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="../../Source/Крест Не активный.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinBut2}" Value="true">
+                                        <Setter Property="Source" Value="../../Source/Крест  активный.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </StackPanel>
+            </Border>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7.138"/>
+                    <ColumnDefinition Width="98"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF19162B">
+                    <Button Background="Transparent" Foreground="Transparent" x:Name="Product" Margin="10 10 10 10" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}" Cursor="Hand" Click="Product_Click">
+                        <Button.Content>
+                            <fa:ImageAwesome Icon="Search" Foreground="White"  />
+                        </Button.Content>
+                    </Button>
+                    
+                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Setting" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}" Click="Setting_Click">
+                        <Button.Content>
+                            <fa:ImageAwesome Icon="Certificate" Foreground="White" />
+                        </Button.Content>
+                    </Button>
+                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="User" Click="User_Click" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}">
+                        <Button.Content>
+                            <fa:ImageAwesome Icon="User" Foreground="White" />
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <Frame x:Name="FrameSalesmen" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
+            </Grid>
+
         </Grid>
     </Border>
 
