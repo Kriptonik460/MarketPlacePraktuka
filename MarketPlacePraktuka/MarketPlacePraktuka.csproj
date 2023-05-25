@@ -79,6 +79,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HeplClasses\ImageConverter.cs" />
     <Compile Include="Models\Address.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
@@ -112,6 +113,7 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhotoConvert.cs" />
     <Compile Include="Models\PhotoProduct.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
@@ -166,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\CBStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ListStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

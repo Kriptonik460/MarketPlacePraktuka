@@ -37,10 +37,9 @@ namespace MarketPlacePraktuka.Pages.Salesman
 
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
+           
                 this.DragMove();
-            }
+            
         }
         #endregion
 
