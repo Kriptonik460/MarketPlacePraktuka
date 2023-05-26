@@ -79,6 +79,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HeplClasses\Filter.cs" />
     <Compile Include="HeplClasses\ImageConverter.cs" />
     <Compile Include="Models\Address.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
@@ -95,6 +96,8 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extensions\Category.Extension.cs" />
+    <Compile Include="Models\Extensions\Status.cs" />
     <Compile Include="Models\ModelMarket.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\CBStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ExpanderSTR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

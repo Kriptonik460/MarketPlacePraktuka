@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.Salesman"
+      xmlns:db="clr-namespace:MarketPlacePraktuka.Models"
+      xmlns:root="clr-namespace:MarketPlacePraktuka"
       mc:Ignorable="d" 
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -13,28 +14,59 @@
     
     <Grid Background="#FF101126">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Expander Grid.Row="0" FontSize="15" Foreground="White">
-            <StackPanel Orientation="Horizontal" x:Name="Categ" TextBlock.Foreground="White" >
-               
-            </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            
+            <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" >
+            <!--<StackPanel Orientation="Horizontal" x:Name="Categ" TextBlock.Foreground="White" />-->
+                <ItemsControl ItemsSource="{Binding Path=[0]}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Expander>
 
-        </Expander>
-        <ListView x:Name="ListProduct" Grid.Column="0" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{DynamicResource MyListViewStyle }" Background="#FF19162B"  ItemsSource="{Binding Products}" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Trebuchet MS" FontSize="22" >
+            <Expander Grid.Row="0" FontSize="15" Foreground="White" HorizontalAlignment="Right" >
+                <!--<StackPanel Orientation="Horizontal" x:Name="Status" TextBlock.Foreground="White" />-->
+                <ItemsControl ItemsSource="{Binding Path=[1]}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Expander>
+
+            <Button Content="+ Доабвить" Click="AddButton_Click" Style="{DynamicResource BTNSTL}"/>
+
+        </StackPanel>
+        <ListView x:Name="ListProduct"
+                  Grid.Column="0" Grid.Row="1"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  Style="{DynamicResource MyListViewStyle }"
+                  Background="#FF19162B"
+                  ItemsSource="{Binding View}"
+                  d:ItemsSource="{d:SampleData ItemCount=5}"
+                  FontFamily="Trebuchet MS"
+                  FontSize="22"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  SelectionChanged="ListProduct_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border CornerRadius="25" Margin="5 5 5 5" Height="200" Width="215" Background="#FF251F45" BorderBrush="Transparent" BorderThickness="2">
+            <ListView.Resources>
+                <DataTemplate DataType="{x:Type db:Product}">
+                    <Border CornerRadius="25" Margin="5 5 5 5" Height="200" Width="240" Background="#FF251F45" BorderBrush="Transparent" BorderThickness="2">
 
                         <Grid Margin="25 5 25 5" >
                             <Grid.RowDefinitions>
@@ -55,52 +87,63 @@
                         </Grid>
                     </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListView.Resources>
         </ListView>
-        <Grid Grid.Column="1" Grid.Row="1" Background="#FF251F45" x:Name="Opusanue"
-              DataContext="{Binding ElementName=ListProduct,Path=SelectedItem}" >
-            <Grid.Style>
-                <Style TargetType="{x:Type Grid}">
+        
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FF251F45" x:Name="Opusanue"
+                      DataContext="{Binding TempProduct}" >
+            <ScrollViewer.Style>
+                <Style TargetType="{x:Type ScrollViewer}">
                     <Setter Property="Visibility" Value="Visible"/>
+                    
                     <Style.Triggers>
                         <Trigger Property="DataContext" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-            </Grid.Style>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel HorizontalAlignment="Right" Grid.Row="0" Margin="5 5 5 5">
+            </ScrollViewer.Style>
 
-                <Image Name="MinBut2"  Height="13" Width="25" MouseDown="MinBut2_MouseDown" >
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Setter Property="Source" Value="../../Source/Крест Не активный.png"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinBut2}" Value="true">
-                                    <Setter Property="Source" Value="../../Source/Крест  активный.png"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1"
-                        Width="300">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Right" Grid.Row="0" Margin="5 5 5 5">
 
+                    <Image Name="MinBut2"  Height="13" Width="25" MouseDown="MinBut2_MouseDown" >
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="../../Source/Крест Не активный.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinBut2}" Value="true">
+                                        <Setter Property="Source" Value="../../Source/Крест  активный.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1"
+                            MinWidth="300"
+                            MaxWidth="400">
+
+                <TextBlock Text="Наименование" FontSize="20" Foreground="White"/>
+                    
+           
                 <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
-                <Image Source="{Binding PhotoProductConvert}"/>
+                    <Image Source="{Binding PhotoProductConvert}" Height="250" Width="250"/>
+                <TextBlock Text="Описание" FontSize="20" Foreground="White"/>
                 <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="Wrap"/>
-
+                <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
                 <TextBox  Text="{Binding Count}" FontSize="20"/>
+                <TextBlock Text="Цена" FontSize="20" Foreground="White"/>
                 <TextBox  Text="{Binding Cost}" FontSize="20"/>
             
             </StackPanel>
-        </Grid>
+            </Grid>
+        </ScrollViewer>
 
 
 
