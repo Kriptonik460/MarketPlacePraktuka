@@ -1,6 +1,5 @@
 ﻿using MarketPlacePraktuka.HeplClasses;
 using MarketPlacePraktuka.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -16,8 +15,10 @@ namespace MarketPlacePraktuka.Pages.Salesman
     /// <summary>
     /// Логика взаимодействия для ProductPageSalesmen.xaml
     /// </summary>
+    /// 
     public partial class ProductPageSalesmen : Page
     {
+
 
         List<CheckBox> checkBoxes = new List<CheckBox>();
         List<CheckBox> checkBoxes2 = new List<CheckBox>();
@@ -31,6 +32,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
         public static readonly DependencyProperty ProductsProperty =
             DependencyProperty.Register("Products", typeof(List<Product>), typeof(Product));
 
+        
 
 
         public Product TempProduct
@@ -48,6 +50,22 @@ namespace MarketPlacePraktuka.Pages.Salesman
             new Filter<Product, Category>(product => product.Category),
             new Filter<Product, Status>(product => product.Status),
         }.AsReadOnly();
+
+        public static List<PhotoProduct> photos = new List<PhotoProduct>();
+
+        public byte[] Photo
+        {
+            get { return (byte[])GetValue(PhotoProperty); }
+            set { SetValue(PhotoProperty, value); }
+        }
+
+        public static readonly DependencyProperty PhotoProperty =
+            DependencyProperty.Register("Photo", typeof(byte[]), typeof(ProductPageSalesmen));
+
+        public static int IndexPhoto = 0;
+
+
+
 
         public IEnumerable<CheckBox> this[int index]
         {
@@ -87,14 +105,16 @@ namespace MarketPlacePraktuka.Pages.Salesman
 
         public ProductPageSalesmen()
         {
-            App.DB.Product.Load();
+            App.DB.Product.LoadAsync();
             View = CollectionViewSource.GetDefaultView(App.DB.Product.Local);
 
             View.Filter = (value) => !Filters.Any() || Filters.All(filter => filter.IsAccepted(value as Product));
             View.Refresh();
-            
+
             InitializeComponent();
 
+
+            Categor.ItemsSource = App.DB.Category.Local.ToList();
             /*
                         foreach (var categoria in App.DB.Category)
                         {
@@ -135,67 +155,135 @@ namespace MarketPlacePraktuka.Pages.Salesman
                                                                 .Cast<object>()
                                                                 .Append(addButton);
         }
-       /* #region Категория
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            var itemCategoria = (sender as CheckBox).DataContext as Category;
-            Products.AddRange(App.DB.Product.Where(p => p.Category.ID == itemCategoria.ID));
-            ListProduct.ItemsSource = Products;
-            ListProduct.Items.Refresh();
-        }
+        /* #region Категория
+         private void CheckBox_Checked(object sender, RoutedEventArgs e)
+         {
+             var itemCategoria = (sender as CheckBox).DataContext as Category;
+             Products.AddRange(App.DB.Product.Where(p => p.Category.ID == itemCategoria.ID));
+             ListProduct.ItemsSource = Products;
+             ListProduct.Items.Refresh();
+         }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            var itemCategoria = (sender as CheckBox).DataContext as Category;
-            foreach(var item in App.DB.Product.Where(p => p.Category.ID == itemCategoria.ID))
-            {
-                Products?.Remove(item);
-            }
-            ListProduct.ItemsSource = Products;
-            ListProduct.Items.Refresh();
-        }
-        #endregion
-        #region Status
-        private void CheckBox_Checked2(object sender, RoutedEventArgs e)
-        {
-            var itemStatus = (sender as CheckBox).DataContext as Status;
-            Products.AddRange(App.DB.Product.Where(p => p.Status.ID == itemStatus.ID));
-            ListProduct.ItemsSource = Products;
-            ListProduct.Items.Refresh();
-        }
+         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+         {
+             var itemCategoria = (sender as CheckBox).DataContext as Category;
+             foreach(var item in App.DB.Product.Where(p => p.Category.ID == itemCategoria.ID))
+             {
+                 Products?.Remove(item);
+             }
+             ListProduct.ItemsSource = Products;
+             ListProduct.Items.Refresh();
+         }
+         #endregion
+         #region Status
+         private void CheckBox_Checked2(object sender, RoutedEventArgs e)
+         {
+             var itemStatus = (sender as CheckBox).DataContext as Status;
+             Products.AddRange(App.DB.Product.Where(p => p.Status.ID == itemStatus.ID));
+             ListProduct.ItemsSource = Products;
+             ListProduct.Items.Refresh();
+         }
 
-        private void CheckBox_Unchecked2(object sender, RoutedEventArgs e)
-        {
-            var itemStatus = (sender as CheckBox).DataContext as Status;
-            foreach (var itemSt in App.DB.Product.Where(p => p.Status.ID == itemStatus.ID))
-            {
-                Products?.Remove(itemSt);
-            }
-            ListProduct.ItemsSource = Products;
-            ListProduct.Items.Refresh();
-        }
-        #endregion*/
-       
+         private void CheckBox_Unchecked2(object sender, RoutedEventArgs e)
+         {
+             var itemStatus = (sender as CheckBox).DataContext as Status;
+             foreach (var itemSt in App.DB.Product.Where(p => p.Status.ID == itemStatus.ID))
+             {
+                 Products?.Remove(itemSt);
+             }
+             ListProduct.ItemsSource = Products;
+             ListProduct.Items.Refresh();
+         }
+         #endregion*/
+
 
         private void MinBut2_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ListProduct.SelectedItem = null;
-
-        }
-
-        private void da_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void ListProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TempProduct = ListProduct.SelectedItem as Product;
+            var itemProduct = ListProduct.SelectedItem as Product;
+            TempProduct = itemProduct;
+            photos = itemProduct.PhotoProduct.ToList();
+            if(photos.Count() == 0)
+            {
+                return;
+            }
+            Photo = photos[IndexPhoto].Photo;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             TempProduct = new Product();
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (TempProduct.ID == 0)
+            {
+                TempProduct.ID_Salesman = App.DB.Salesman.FirstOrDefault(s => s.User.ID == SaveSomeData.user.ID).ID;
+                TempProduct.Removed = false;
+                TempProduct.ID_Status = 3;
+                App.DB.Product.Add(TempProduct);
+            }
+            App.DB.SaveChanges();
+        }
+
+        private void DelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.DB.Product.Remove(TempProduct);
+            App.DB.SaveChanges();
+        }
+
+        private void Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var product = App.DB.Product.Where(p => p.Name.Contains(Search.Text)).ToList();
+            ListProduct.ItemsSource = product;
+            View.Filter = (value) => !Filters.Any() || Filters.All(filter => filter.IsAccepted(value as Product));
+
+            View.Refresh();
+        }
+
+        private void ImangeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] imageGetInExplorer = ImageConverter.OpenFileDialogSave();
+            App.DB.PhotoProduct.Add(new PhotoProduct
+            {
+                ID_Product = TempProduct.ID,
+                Photo = imageGetInExplorer
+            });
+            App.DB.SaveChangesAsync();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                IndexPhoto--;
+                Photo = photos[IndexPhoto].Photo;
+            }
+            catch
+            {
+                IndexPhoto = 0;
+                MessageBox.Show("Ты ждолбаёёёб");
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                IndexPhoto++ ;
+                Photo = photos[IndexPhoto].Photo;
+            }
+            catch
+            {
+                IndexPhoto = 0;
+                MessageBox.Show("Ты ждолбаёёёб");
+            }
         }
     }
 }

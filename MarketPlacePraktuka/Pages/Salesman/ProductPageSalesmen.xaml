@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:db="clr-namespace:MarketPlacePraktuka.Models"
       xmlns:root="clr-namespace:MarketPlacePraktuka"
-      mc:Ignorable="d" 
-      DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProductPageSalesmen">
+      Title="ProductPageSalesmen"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}">
   
     
     
@@ -21,8 +21,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition />
+                
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
+                
             <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" >
             <!--<StackPanel Orientation="Horizontal" x:Name="Categ" TextBlock.Foreground="White" />-->
                 <ItemsControl ItemsSource="{Binding Path=[0]}">
@@ -44,10 +53,31 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </Expander>
+            </StackPanel>
 
-            <Button Content="+ Доабвить" Click="AddButton_Click" Style="{DynamicResource BTNSTL}"/>
+            <StackPanel HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal">
+            <Button Content="+ Добавить новый товар" Click="AddButton_Click" Style="{DynamicResource BTNSTL}"/>
+                
+            <TextBox  x:Name="Search"  Foreground="white"  Background="Transparent"   BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Width="150"  TextChanged="Search_TextChanged" />
 
-        </StackPanel>
+
+            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Поиск" Width="150"  Foreground="White" HorizontalAlignment="Left"   >
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=Search}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock> 
+            </StackPanel>
+
+        </Grid>
+        
         <ListView x:Name="ListProduct"
                   Grid.Column="0" Grid.Row="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -90,8 +120,16 @@
             </ListView.Resources>
         </ListView>
         
+                    <Grid>
+                        <Image Source="{Binding Photo}" Height="100" Width="100" Stretch="Fill" HorizontalAlignment="Center"
+                               VerticalAlignment="Top"/>
+                        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content="&lt;"
+                                Click="Button_Click"/>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content=">"
+                                Click="Button_Click_1"/>
+                    </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FF251F45" x:Name="Opusanue"
-                      DataContext="{Binding TempProduct}" >
+                      DataContext="{Binding TempProduct}" VerticalScrollBarVisibility="Hidden">
             <ScrollViewer.Style>
                 <Style TargetType="{x:Type ScrollViewer}">
                     <Setter Property="Visibility" Value="Visible"/>
@@ -133,14 +171,29 @@
                     
            
                 <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
-                    <Image Source="{Binding PhotoProductConvert}" Height="250" Width="250"/>
-                <TextBlock Text="Описание" FontSize="20" Foreground="White"/>
+
+                    <TextBlock Text="Описание" FontSize="20" Foreground="White"/>
                 <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="Wrap"/>
-                <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
+                <TextBlock Text="Характеристика" FontSize="20" Foreground="White"/>
+                <TextBox  Text="{Binding Characteristics}" FontSize="20" TextWrapping="Wrap"/>
+                <TextBlock Text="Категория" FontSize="20" Foreground="White"/>
+                    <ComboBox SelectedItem="{Binding Category }" x:Name="Categor" DisplayMemberPath="Name"/>
+                    <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
                 <TextBox  Text="{Binding Count}" FontSize="20"/>
                 <TextBlock Text="Цена" FontSize="20" Foreground="White"/>
                 <TextBox  Text="{Binding Cost}" FontSize="20"/>
-            
+                    <TextBlock Text="Скидка" FontSize="20" Foreground="White"/>
+                    <TextBox  Text="{Binding Discount}" FontSize="20"/>
+                    
+
+                    <StackPanel Orientation="Vertical">
+                        <Button Style="{DynamicResource BTNSTL}" Content="Добавить изображение" 
+                                x:Name="ImangeBtn" Click="ImangeBtn_Click"/>
+                        <Button Style="{DynamicResource BTNSTL}" Content="Сохранить" 
+                                x:Name="SaveBtn" Click="SaveBtn_Click"/>
+                        <Button Style="{DynamicResource BTNSTL}" Content="Удалить"
+                                x:Name="DelBtn" Click="DelBtn_Click"/>
+                    </StackPanel>
             </StackPanel>
             </Grid>
         </ScrollViewer>

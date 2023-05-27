@@ -11,7 +11,7 @@ namespace MarketPlacePraktuka.Models
 {
     partial class Product
     {
-        public ImageSource PhotoProductConvert =>HeplClasses.ImageConverter.ConvertToImageSource(PhotoProduct.FirstOrDefault()?.Photo);
+        public ImageSource PhotoProductConvert =>HeplClasses.ImageConverter.ConvertToImageSource(PhotoProduct.FirstOrDefault()? .Photo);
     }
 
    

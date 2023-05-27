@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace MarketPlacePraktuka.HeplClasses
 {
@@ -21,6 +22,21 @@ namespace MarketPlacePraktuka.HeplClasses
             bitImg.EndInit();
             ImageSource image = bitImg as ImageSource;
             return image;
+        }
+
+        public static byte[] OpenFileDialogSave()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "Image filies|*.jpg;*.jpeg;*.png"
+            };
+
+            if(openFileDialog.ShowDialog().GetValueOrDefault()) 
+            {
+                BitmapFrame.Create(new MemoryStream(File.ReadAllBytes(openFileDialog.FileName)), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                return File.ReadAllBytes(openFileDialog.FileName);
+            }
+            return null;
         }
     }
 }
