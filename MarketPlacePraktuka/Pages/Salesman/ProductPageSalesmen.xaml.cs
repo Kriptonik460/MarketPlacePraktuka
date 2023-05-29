@@ -3,12 +3,15 @@ using MarketPlacePraktuka.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.IO;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System;
 
 namespace MarketPlacePraktuka.Pages.Salesman
 {
@@ -43,12 +46,17 @@ namespace MarketPlacePraktuka.Pages.Salesman
 
         // Using a DependencyProperty as the backing store for TempOroduct.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TempProductProperty =
-            DependencyProperty.Register(nameof(TempProduct), typeof(Product), typeof(ProductPageSalesmen), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(TempProduct), typeof(Product), typeof(ProductPageSalesmen));
 
         public readonly IReadOnlyList<IFilter<Product>> Filters = new List<IFilter<Product>>()
         {
             new Filter<Product, Category>(product => product.Category),
             new Filter<Product, Status>(product => product.Status),
+        }.AsReadOnly();
+
+        public readonly IReadOnlyList<Searching<Product>> Searchings = new List<Searching<Product>>()
+        {
+            new Searching<Product>(product => product.Name)
         }.AsReadOnly();
 
         public static List<PhotoProduct> photos = new List<PhotoProduct>();
@@ -64,8 +72,21 @@ namespace MarketPlacePraktuka.Pages.Salesman
 
         public static int IndexPhoto = 0;
 
+        private string _searchingText = "";
+        private RelayCommand<Product> _selectionCommand;
 
+        public RelayCommand<Product> SelectionCommand =>
+            _selectionCommand ?? (_selectionCommand = new RelayCommand<Product>(product => TempProduct = product));
 
+        public string SearchingText
+        {
+            get => _searchingText;
+            set
+            {
+                _searchingText = value;
+                View.Refresh();
+            }
+        }
 
         public IEnumerable<CheckBox> this[int index]
         {
@@ -108,7 +129,8 @@ namespace MarketPlacePraktuka.Pages.Salesman
             App.DB.Product.LoadAsync();
             View = CollectionViewSource.GetDefaultView(App.DB.Product.Local);
 
-            View.Filter = (value) => !Filters.Any() || Filters.All(filter => filter.IsAccepted(value as Product));
+            View.Filter = (value) => (!Filters.Any() || Filters.All(filter => filter.IsAccepted(value as Product))) &&
+                                     (!Searchings.Any() || Searchings.All(searching => searching.IsAccepted(value as Product, SearchingText)));
             View.Refresh();
 
             InitializeComponent();
@@ -199,12 +221,16 @@ namespace MarketPlacePraktuka.Pages.Salesman
 
         private void MinBut2_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ListProduct.SelectedItem = null;
+            
+            TempProduct = null;
         }
 
         private void ListProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var itemProduct = ListProduct.SelectedItem as Product;
+         
+            IndexPhoto = 0;
+            if (!(ListProduct.SelectedItem is Product itemProduct))
+                return;
             TempProduct = itemProduct;
             photos = itemProduct.PhotoProduct.ToList();
             if(photos.Count() == 0)
@@ -213,9 +239,12 @@ namespace MarketPlacePraktuka.Pages.Salesman
             }
             Photo = photos[IndexPhoto].Photo;
         }
+     
+       
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+           
             TempProduct = new Product();
         }
 
@@ -236,15 +265,6 @@ namespace MarketPlacePraktuka.Pages.Salesman
         {
             App.DB.Product.Remove(TempProduct);
             App.DB.SaveChanges();
-        }
-
-        private void Search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var product = App.DB.Product.Where(p => p.Name.Contains(Search.Text)).ToList();
-            ListProduct.ItemsSource = product;
-            View.Filter = (value) => !Filters.Any() || Filters.All(filter => filter.IsAccepted(value as Product));
-
-            View.Refresh();
         }
 
         private void ImangeBtn_Click(object sender, RoutedEventArgs e)
@@ -268,7 +288,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
             catch
             {
                 IndexPhoto = 0;
-                MessageBox.Show("Ты ждолбаёёёб");
+                MessageBox.Show("Достигнут конец по фотографиям");
             }
         }
 
@@ -282,8 +302,30 @@ namespace MarketPlacePraktuka.Pages.Salesman
             catch
             {
                 IndexPhoto = 0;
-                MessageBox.Show("Ты ждолбаёёёб");
+                MessageBox.Show("Достигнут конец по фотографиям");
             }
         }
+    }
+
+    public class RelayCommand<T> : ICommand
+    {
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        private readonly Predicate<T> _canExecute;
+        private readonly Action<T> _execute;
+
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter) => _canExecute?.Invoke((T)parameter) != false;
+
+        public void Execute(object parameter) => _execute?.Invoke((T)parameter);
     }
 }

@@ -44,7 +44,17 @@ namespace MarketPlacePraktuka.HeplClasses
 
         void Add(object value);
         void Remove(object value);
-
         bool IsAccepted(TSource source);
+    }
+
+    public class Searching<TSource>
+    {
+        private readonly Func<TSource, string> _propertyGetter;
+
+        public Searching(Func<TSource, string> propertyGetter) =>
+            _propertyGetter = propertyGetter;
+
+        public bool IsAccepted(TSource source, string searchingText) =>
+            _propertyGetter(source).Trim().ToLower().Contains(searchingText.Trim().ToLower());
     }
 }

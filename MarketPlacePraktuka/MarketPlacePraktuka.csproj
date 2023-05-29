@@ -254,6 +254,7 @@
       <DependentUpon>ModelMarket.edmx</DependentUpon>
       <LastGenOutput>ModelMarket.cs</LastGenOutput>
     </Content>
+    <Resource Include="Source\free-icon-no-photo-5540531.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
