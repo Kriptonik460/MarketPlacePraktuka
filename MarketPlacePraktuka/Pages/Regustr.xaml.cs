@@ -69,63 +69,71 @@ namespace MarketPlacePraktuka.Pages
         #endregion
         private void Reg_Click(object sender, RoutedEventArgs e)
         {
-            if (TypeUserCB.SelectedIndex == 0)
+            var proverkaLogin = LoginTb.Text.Trim();
+            if (App.DB.User.FirstOrDefault(d => d.Login == proverkaLogin) == null)
             {
-                if ((string.IsNullOrEmpty(PatrTb.Text)) && (string.IsNullOrEmpty(LoginTb.Text)) && (string.IsNullOrEmpty(PasswordTb.Text)) && (string.IsNullOrEmpty(NameTb.Text)) && (string.IsNullOrEmpty(FamTb.Text)))
+                // App.DB.User.FirstOrDefault(  e => e.Login == proverkaLogin) => нашел : User ; не нашел : null
+                // App.DB.User.FirstOrDefault(  e => e.Login == proverkaLogin) == null
+                if (TypeUserCB.SelectedIndex == 0)
                 {
-                    MessageBox.Show("Поля пустые");
-                    return;
+                    if ((string.IsNullOrEmpty(PatrTb.Text)) && (string.IsNullOrEmpty(LoginTb.Text)) && (string.IsNullOrEmpty(PasswordTb.Text)) && (string.IsNullOrEmpty(NameTb.Text)) && (string.IsNullOrEmpty(FamTb.Text)))
+                    {
+                        MessageBox.Show("Поля пустые");
+                        return;
+
+                    }
+                    user = new User()
+                    {
+                        Login = LoginTb.Text.Trim(),
+                        Password = PasswordTb.Text.Trim()
+                    };
+                    App.DB.User.Add(user);
+                    client = new MarketPlacePraktuka.Models.Client()
+                    {
+                        Name = NameTb.Text.Trim(),
+                        Surname = FamTb.Text.Trim(),
+                        Patronymic = PatrTb.Text.Trim(),
+                        ID_User = user.ID
+                    };
+                    App.DB.Client.Add(client);
+                    App.DB.SaveChanges();
+                    new MainWindow().Show();
+                    Close();
 
                 }
-                user = new User()
-                {
-                    Login = LoginTb.Text.Trim(),
-                    Password = PasswordTb.Text.Trim()
-                };
-                App.DB.User.Add(user);
-                client = new MarketPlacePraktuka.Models.Client()
-                {
-                    Name = NameTb.Text.Trim(),
-                    Surname = FamTb.Text.Trim(),
-                    Patronymic = PatrTb.Text.Trim(),
-                    ID_User = user.ID
-                };
-                App.DB.Client.Add(client);
-                App.DB.SaveChanges();
-                new MainWindow().Show();
-                Close();
 
+
+
+                else
+                {
+
+                    if ((string.IsNullOrEmpty(NameField.Text)) && (string.IsNullOrEmpty(LoginTb.Text)) && (string.IsNullOrEmpty(PasswordTb.Text)))
+                    {
+                        MessageBox.Show("Поля пустые");
+                        return;
+                    }
+                    user = new User()
+                    {
+                        Login = LoginTb.Text.Trim(),
+                        Password = PasswordTb.Text.Trim()
+                    };
+                    App.DB.User.Add(user);
+                    salesman = new MarketPlacePraktuka.Models.Salesman()
+                    {
+                        NameCompany = NameTb.Text.Trim(),
+                        ID_User = user.ID
+                    };
+                    App.DB.Salesman.Add(salesman);
+                    App.DB.SaveChanges();
+                    new MainWindow().Show();
+                    Close();
+
+
+
+                }
             }
-
-
-
             else
-            {
-
-                if ((string.IsNullOrEmpty(NameField.Text)) && (string.IsNullOrEmpty(LoginTb.Text)) && (string.IsNullOrEmpty(PasswordTb.Text)))
-                {
-                    MessageBox.Show("Поля пустые");
-                    return;
-                }
-                user = new User()
-                {
-                    Login = LoginTb.Text.Trim(),
-                    Password = PasswordTb.Text.Trim()
-                };
-                App.DB.User.Add(user);
-                salesman = new MarketPlacePraktuka.Models.Salesman()
-                {
-                    NameCompany = NameTb.Text.Trim(),
-                    ID_User = user.ID
-                };
-                App.DB.Salesman.Add(salesman);
-                App.DB.SaveChanges();
-                new MainWindow().Show();
-                Close();
-
-
-
-            }
+                MessageBox.Show("Данный Логин занят");
         }
         #region Проверка Полей
         private void ValidationLoginPassword(object sender, TextChangedEventArgs e)

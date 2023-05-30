@@ -148,7 +148,7 @@
                     </TextBlock.Style>
                 </TextBlock>
             </Grid>
-            <ComboBox x:Name="TypeUserCB" Grid.Row="12" Grid.Column="1" FontSize="20" SelectedIndex="0" Style="{StaticResource ComboBoxStyle }" >
+            <ComboBox x:Name="TypeUserCB" Grid.Row="12" Grid.Column="1" FontSize="20" SelectedIndex="0" Style="{DynamicResource CustomComboBoxStyle }" >
                 <ComboBoxItem  >
                     <TextBlock Text="Клиент" FontSize="20"/>
                 </ComboBoxItem>

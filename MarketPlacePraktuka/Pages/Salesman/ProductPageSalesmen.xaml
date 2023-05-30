@@ -9,9 +9,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductPageSalesmen"
       DataContext="{Binding RelativeSource={RelativeSource Self}}" >
-  
-    
-    
+    <Page.Resources>
+        <ImageSource x:Key="DefaultImage">/Source/free-icon-no-photo-5540531.png</ImageSource>
+    </Page.Resources>
+
+
+
     <Grid Background="#FF101126">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -27,32 +30,32 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition />
-                
+
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
-                
-            <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" >
-            <!--<StackPanel Orientation="Horizontal" x:Name="Categ" TextBlock.Foreground="White" />-->
-                <ItemsControl ItemsSource="{Binding Path=[0]}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </Expander>
 
-            <Expander Grid.Row="0" FontSize="15" Foreground="White" HorizontalAlignment="Right" >
-                <!--<StackPanel Orientation="Horizontal" x:Name="Status" TextBlock.Foreground="White" />-->
-                <ItemsControl ItemsSource="{Binding Path=[1]}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </Expander>
+                <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" >
+                    <!--<StackPanel Orientation="Horizontal" x:Name="Categ" TextBlock.Foreground="White" />-->
+                    <ItemsControl ItemsSource="{Binding Path=[0]}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Expander>
+
+                <Expander Grid.Row="0" FontSize="15" Foreground="White" HorizontalAlignment="Right" >
+                    <!--<StackPanel Orientation="Horizontal" x:Name="Status" TextBlock.Foreground="White" />-->
+                    <ItemsControl ItemsSource="{Binding Path=[1]}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Expander>
             </StackPanel>
 
             <Grid HorizontalAlignment="Left" Grid.Row="0" >
@@ -60,24 +63,24 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-            <Button Content="+ Добавить новый товар" Click="AddButton_Click" Style="{DynamicResource BTNSTL}"/>
+                <Button Content="+ Добавить новый товар" Click="AddButton_Click" Style="{DynamicResource BTNSTL}"/>
 
                 <TextBox Text="{Binding SearchingText, UpdateSourceTrigger=PropertyChanged}"  x:Name="Search" Grid.Column="1"  Foreground="white"  Background="Transparent"   BorderBrush="Transparent"   Width="250"  FontSize="16" VerticalAlignment="Center" />
 
 
-                <TextBlock IsHitTestVisible="False" Grid.Column="1" FontSize="20" Text="Поиск"   Width="250"  Foreground="White" Padding="0 0 0 0 " RenderTransformOrigin="-0.365,0.619" VerticalAlignment="Center"    >
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
+                <TextBlock IsHitTestVisible="False" Grid.Column="1" FontSize="20" Text="Поиск"  Foreground="White" Padding="0 0 0 0 " RenderTransformOrigin="-0.365,0.619" VerticalAlignment="Top" Margin="10,9,17,0"    >
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
 
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=Search}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock> 
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=Search}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
             </Grid>
 
         </Grid>
@@ -99,7 +102,7 @@
             </ListView.ItemsPanel>
             <ListView.Resources>
                 <DataTemplate DataType="{x:Type db:Product}">
-                    <Border CornerRadius="25" Margin="5 5 5 5" Height="200" Width="240" Background="#FF251F45" BorderBrush="Transparent" BorderThickness="2">
+                    <Border CornerRadius="25" Margin="5 5 5 5" Height="350" Width="320" Background="#FF251F45" BorderBrush="Transparent" BorderThickness="2">
                         <DockPanel Margin="25 5 25 10" >
                             <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"
                                         DockPanel.Dock="Top"/>
@@ -109,22 +112,38 @@
                             <Button Content="Подробнее"
                                     DockPanel.Dock="Bottom"
                                     FontSize="18"
-                                    VerticalAlignment="Bottom"
+                                    VerticalAlignment="Bottom" Style="{DynamicResource BTNSTL}"
                                     Command="{Binding DataContext.SelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"
-                                    CommandParameter="{Binding}"/>
+                                    CommandParameter="{Binding}" Click="Button_Click_2"/>
+                            <StackPanel Orientation="Vertical" >
+                                <Image  Height="200" Width="200" Stretch="Fill" HorizontalAlignment="Center"
+                               VerticalAlignment="Top" x:Name="PhotoImg" Source="{Binding MainPhoto, TargetNullValue={StaticResource DefaultImage}}">
+                                    <!--<Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="{Binding Photo}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Photo}" Value="{x:Null}">
+                                                    <Setter Property="Source" Value="C:\Users\user\source\repos\MarketPlacePraktuka\MarketPlacePraktuka\Source\free-icon-no-photo-5540531.png" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>-->
+                                </Image>
+
+                            </StackPanel>
                         </DockPanel>
                     </Border>
                 </DataTemplate>
             </ListView.Resources>
         </ListView>
-        
+
         <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FF251F45" x:Name="Opusanue"
                       VerticalScrollBarVisibility="Hidden"
                       DataContext="{Binding TempProduct}">
             <ScrollViewer.Style>
                 <Style TargetType="{x:Type ScrollViewer}">
                     <Setter Property="Visibility" Value="Visible"/>
-                    
+
                     <Style.Triggers>
                         <Trigger Property="DataContext" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -159,30 +178,30 @@
                             MinWidth="350"
                             MaxWidth="350"  >
                     <StackPanel>
-                        
-                    <TextBlock Text="Наименование" FontSize="20" Foreground="White"/>
+
+                        <TextBlock Text="Наименование" FontSize="20" Foreground="White"/>
 
 
-                    <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
+                        <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
 
-                    <TextBlock Text="Описание" FontSize="20" Foreground="White"/>
-                    <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="Wrap"/>
-                    <TextBlock Text="Характеристика" FontSize="20" Foreground="White"/>
-                    <TextBox  Text="{Binding Characteristics}" FontSize="20" TextWrapping="Wrap"/>
-                    <TextBlock Text="Категория" FontSize="20" Foreground="White"/>
-                    <ComboBox SelectedItem="{Binding Category }" x:Name="Categor" DisplayMemberPath="Name"/>
-                    <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
-                    <TextBox  Text="{Binding Count}" FontSize="20"/>
-                    <TextBlock Text="Цена" FontSize="20" Foreground="White"/>
-                    <TextBox  Text="{Binding Cost}" FontSize="20"/>
-                    <TextBlock Text="Скидка" FontSize="20" Foreground="White"/>
-                    <TextBox  Text="{Binding Discount}" FontSize="20"/>
+                        <TextBlock Text="Описание" FontSize="20" Foreground="White"/>
+                        <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="Wrap"/>
+                        <TextBlock Text="Характеристика" FontSize="20" Foreground="White"/>
+                        <TextBox  Text="{Binding Characteristics}" FontSize="20" TextWrapping="Wrap"/>
+                        <TextBlock Text="Категория" FontSize="20" Foreground="White"/>
+                        <ComboBox SelectedItem="{Binding Category }" Style="{DynamicResource CustomComboBoxStyle}" x:Name="Categor"  DisplayMemberPath="Name" Height="40" />
+                        <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
+                        <TextBox  Text="{Binding Count}" FontSize="20"/>
+                        <TextBlock Text="Цена" FontSize="20" Foreground="White"/>
+                        <TextBox  Text="{Binding Cost}" FontSize="20"/>
+                        <TextBlock Text="Скидка" FontSize="20" Foreground="White"/>
+                        <TextBox  Text="{Binding Discount}" FontSize="20"/>
                     </StackPanel>
 
 
                     <StackPanel Orientation="Vertical" >
                         <Image  Height="200" Width="200" Stretch="Fill" HorizontalAlignment="Center"
-                               VerticalAlignment="Top" x:Name="PhotoImg">
+                               VerticalAlignment="Top" x:Name="PhotoImg" DataContext="{Binding PhotoProduct}">
                             <Image.Style>
                                 <Style TargetType="{x:Type Image}">
                                     <Setter Property="Source" Value="{Binding Photo}" />
@@ -195,18 +214,23 @@
                             </Image.Style>
                         </Image>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            
-                        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content="←"
+
+                            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content="←"
                                 Click="Button_Click" Style="{DynamicResource BTNSTL}"/>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content="→"
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content="→"
                                 Click="Button_Click_1" Style="{DynamicResource BTNSTL}"/>
                         </StackPanel>
                     </StackPanel>
 
 
                     <StackPanel Orientation="Vertical">
-                        <Button Style="{DynamicResource BTNSTL}" Content="Добавить изображение" 
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Style="{DynamicResource BTNSTL}" Content="Добавить изображение" 
                                 x:Name="ImangeBtn" Click="ImangeBtn_Click"/>
+                            <Button Style="{DynamicResource BTNSTL}" Content="Удалить изображение" 
+                                x:Name="ImangeDelBtn" Click="ImangeDelBtn_Click"/>
+                        </StackPanel>
                         <Button Style="{DynamicResource BTNSTL}" Content="Сохранить" 
                                 x:Name="SaveBtn" Click="SaveBtn_Click"/>
                         <Button Style="{DynamicResource BTNSTL}" Content="Удалить"

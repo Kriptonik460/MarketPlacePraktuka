@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MarketPlacePraktuka.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +20,14 @@ namespace MarketPlacePraktuka.Pages.Salesman
 {
     public partial class MainPageSalesman : Window
     {
+        public static MainPageSalesman Instance { get; private set; }
         public MainPageSalesman()
         {
             InitializeComponent();
+            Instance = this;
             FrameSalesmen.Navigate(new ProductPageSalesmen());
-
+            App.DB.Salesman.Load();
+            NameCompany.Text = App.DB.Salesman.FirstOrDefault(s => s.User.ID == SaveSomeData.user.ID).NameCompany;
         }
         #region Функционал сверху
         private void MinBut2_MouseDown(object sender, MouseButtonEventArgs e)
@@ -43,7 +48,29 @@ namespace MarketPlacePraktuka.Pages.Salesman
         }
         #endregion
 
-      
+        private void AnimateTextBlock()
+        {
+            // Создаем анимацию смещения по оси X
+            DoubleAnimation slideAnimation = new DoubleAnimation();
+            slideAnimation.From = myBorder.ActualWidth;
+            slideAnimation.To = -NameCompany.ActualWidth;
+            slideAnimation.Duration = TimeSpan.FromSeconds(2);
+            slideAnimation.Completed += (s, e) =>
+            {
+                // По завершении первой части анимации изменяем текст и запускаем ее заново
+                NameCompany.Text = App.DB.Salesman.FirstOrDefault(g => g.User.ID == SaveSomeData.user.ID).NameCompany;
+                slideAnimation.From = myBorder.ActualWidth;
+                slideAnimation.To = -NameCompany.ActualWidth;
+                NameCompany.BeginAnimation(Canvas.LeftProperty, slideAnimation);
+            };
+
+            // Добавляем анимацию к свойству Canvas.Left элемента TextBlock
+            NameCompany.BeginAnimation(Canvas.LeftProperty, slideAnimation);
+        }
+
+
+
+
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {

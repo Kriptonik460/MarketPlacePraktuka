@@ -116,6 +116,7 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partials\Product.cs" />
     <Compile Include="Models\PhotoConvert.cs" />
     <Compile Include="Models\PhotoProduct.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
@@ -175,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\ExpanderSTR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ImageStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

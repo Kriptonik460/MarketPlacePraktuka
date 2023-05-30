@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System;
+using System.Windows.Media.Imaging;
 
 namespace MarketPlacePraktuka.Pages.Salesman
 {
@@ -225,20 +226,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
             TempProduct = null;
         }
 
-        private void ListProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-         
-            IndexPhoto = 0;
-            if (!(ListProduct.SelectedItem is Product itemProduct))
-                return;
-            TempProduct = itemProduct;
-            photos = itemProduct.PhotoProduct.ToList();
-            if(photos.Count() == 0)
-            {
-                return;
-            }
-            Photo = photos[IndexPhoto].Photo;
-        }
+      
      
        
 
@@ -259,12 +247,15 @@ namespace MarketPlacePraktuka.Pages.Salesman
                 App.DB.Product.Add(TempProduct);
             }
             App.DB.SaveChanges();
+            MainPageSalesman.Instance.FrameSalesmen.Navigate(new ProductPageSalesmen());
+
         }
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
         {
             App.DB.Product.Remove(TempProduct);
             App.DB.SaveChanges();
+            MainPageSalesman.Instance.FrameSalesmen.Navigate(new ProductPageSalesmen());
         }
 
         private void ImangeBtn_Click(object sender, RoutedEventArgs e)
@@ -276,6 +267,8 @@ namespace MarketPlacePraktuka.Pages.Salesman
                 Photo = imageGetInExplorer
             });
             App.DB.SaveChangesAsync();
+            View.Refresh();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -283,7 +276,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
             try
             {
                 IndexPhoto--;
-                Photo = photos[IndexPhoto].Photo;
+                PhotoImg.Source = ImageConverter.ConvertToImageSource(photos[IndexPhoto].Photo);
             }
             catch
             {
@@ -297,13 +290,54 @@ namespace MarketPlacePraktuka.Pages.Salesman
             try
             {
                 IndexPhoto++ ;
-                Photo = photos[IndexPhoto].Photo;
+                PhotoImg.Source = ImageConverter.ConvertToImageSource( photos[IndexPhoto].Photo);
             }
             catch
             {
                 IndexPhoto = 0;
                 MessageBox.Show("Достигнут конец по фотографиям");
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            
+             if (PhotoImg == null)
+             {
+
+                BitmapImage photoImg = new BitmapImage();
+                photoImg.BeginInit();
+                photoImg.UriSource = new Uri("C:\\Users\\user\\source\\repos\\MarketPlacePraktuka\\MarketPlacePraktuka\\Source\\free-icon-no-photo-5540531.png", UriKind.Relative);
+                photoImg.CacheOption = BitmapCacheOption.Default;
+                photoImg.EndInit();
+
+                PhotoImg = new Image
+                {
+                    Source = photoImg
+                };
+             }
+             else
+                {
+                    IndexPhoto = 0;
+                    if (!((sender as Button).DataContext is Product itemProduct))
+                        return;
+                    TempProduct = itemProduct;
+                    photos = itemProduct.PhotoProduct.ToList();
+                    if (photos.Count() == 0)
+                    {
+                        return;
+                    }
+                    PhotoImg.Source = ImageConverter.ConvertToImageSource(photos[0].Photo);
+                }
+        }
+
+        private void ImangeDelBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            App.DB.PhotoProduct.Remove(photos[IndexPhoto]);
+            App.DB.SaveChanges();
+            MainPageSalesman.Instance.FrameSalesmen.Navigate(new  ProductPageSalesmen());
+           
         }
     }
 

@@ -7,7 +7,8 @@
         xmlns:fa ="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d" WindowStyle="None"  AllowsTransparency="True"
         WindowState="Maximized"
-        Title="MainPageSalesman" Height="555" Width="984" WindowStartupLocation="CenterScreen"  ResizeMode="NoResize"  Background="Transparent" BorderBrush="Transparent"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+        Title="MainPageSalesman" Height="555" Width="984" WindowStartupLocation="CenterScreen"   Background="Transparent" BorderBrush="Transparent"
         >
     <!--<Window.Resources>
         <Storyboard x:Key="RainbowStoryboard">
@@ -36,7 +37,7 @@
             <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
         </EventTrigger>
     </Window.Triggers>-->
-    <Border x:Name="border"  CornerRadius="25 25 0 0 " Background="#FF101126">
+    <Border x:Name="border"   Background="#FF101126">
         <!--<Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
         </Border.BorderBrush>-->
@@ -46,7 +47,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border  CornerRadius="25 25 0 0" Background="#FF251F45" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+            <Border   Background="#FF251F45" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
 
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
@@ -93,7 +94,7 @@
                             <fa:ImageAwesome Icon="Search" Foreground="White"  />
                         </Button.Content>
                     </Button>
-                    
+
                     <Button Background="Transparent" Margin="10 10 10 10" x:Name="Setting" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}" Click="Setting_Click">
                         <Button.Content>
                             <fa:ImageAwesome Icon="Certificate" Foreground="White" />
@@ -106,8 +107,15 @@
                     </Button>
                 </StackPanel>
                 <Frame x:Name="FrameSalesmen" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" />
-            </Grid>
+                <Grid Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" >
 
+                    <Border x:Name="myBorder" Width="200" Height="50" BorderThickness="2" BorderBrush="Black">
+                        <TextBlock x:Name="NameCompany" Text="Привет, мир!" HorizontalAlignment="Right"/>
+                    </Border>
+
+                </Grid>
+
+            </Grid>
         </Grid>
     </Border>
 
