@@ -112,6 +112,7 @@
                             <Button Content="Подробнее"
                                     DockPanel.Dock="Bottom"
                                     FontSize="18"
+                                    x:Name="Info" 
                                     VerticalAlignment="Bottom" Style="{DynamicResource BTNSTL}"
                                     Command="{Binding DataContext.SelectionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"
                                     CommandParameter="{Binding}" Click="Button_Click_2"/>
@@ -207,7 +208,7 @@
                                     <Setter Property="Source" Value="{Binding Photo}" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Photo}" Value="{x:Null}">
-                                            <Setter Property="Source" Value="C:\Users\user\source\repos\MarketPlacePraktuka\MarketPlacePraktuka\Source\free-icon-no-photo-5540531.png" />
+                                            <Setter Property="Source" Value="/Source/free-icon-no-photo-5540531.png" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -215,9 +216,9 @@
                         </Image>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content="←"
+                            <Button HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="LeftBtn" Content="←"
                                 Click="Button_Click" Style="{DynamicResource BTNSTL}"/>
-                            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content="→"
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="RightBtn" Content="→"
                                 Click="Button_Click_1" Style="{DynamicResource BTNSTL}"/>
                         </StackPanel>
                     </StackPanel>

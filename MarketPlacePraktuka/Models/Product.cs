@@ -11,11 +11,8 @@ namespace MarketPlacePraktuka.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.Specialized;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-
-    public partial class Product : INotifyPropertyChanged
+    
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
@@ -43,12 +40,5 @@ namespace MarketPlacePraktuka.Models
         public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductList> ProductList { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
