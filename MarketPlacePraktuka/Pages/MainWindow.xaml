@@ -9,7 +9,7 @@
         Background="Transparent"
         Title="MainWindow" Height="480" Width="488" WindowStartupLocation="CenterScreen" >
 
-    <Border CornerRadius="25" BorderThickness="5" Background="#FF101126">
+    <Border CornerRadius="25" BorderThickness="5" Background="#ff3a3a3a">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="81*"/>
@@ -27,7 +27,7 @@
                 <RowDefinition Height="44*"/>
                 <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" CornerRadius="25 25 0 0" Background="#FF251F45" MouseDown="ToolBar_MouseDown" Grid.ColumnSpan="3" Margin="0,0,0,88" Grid.RowSpan="2"  >
+            <Border Grid.Row="0" CornerRadius="25 25 0 0" Background="#FF232323" MouseDown="ToolBar_MouseDown" Grid.ColumnSpan="3" Margin="0,0,0,88" Grid.RowSpan="2"  >
 
                 <Grid  Name="ToolBar"  >
 
@@ -93,8 +93,8 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button Content="Авторизоваться" x:Name="Avtor" FontSize="20" Background="Transparent" Grid.Row="6" Grid.Column="1" Click="Avtor_Click" Style="{DynamicResource BTNSTL}" />
-            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="7" Grid.Column="1" Click="Reg_Click" Style="{DynamicResource BTNSTL}" />
+            <Button Content="Авторизоваться" x:Name="Avtor" FontSize="20" Grid.Row="6" Grid.Column="1" Click="Avtor_Click"  />
+            <Button Content="Регистрация" x:Name="Reg" FontSize="20"  Grid.Row="7" Grid.Column="1" Click="Reg_Click"  />
 
 
         </Grid>

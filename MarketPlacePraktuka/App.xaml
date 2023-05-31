@@ -8,13 +8,11 @@
             
             <ResourceDictionary.MergedDictionaries>
                 
-                <ResourceDictionary Source="/Style/BtnStyle.xaml"/>
-                <ResourceDictionary Source="/Style/TxtStyle.xaml"/>
-                <ResourceDictionary Source="/Style/CBStyle.xaml"/>
-                <ResourceDictionary Source="/Style/BorderStyle.xaml"/>
-                <ResourceDictionary Source="/Style/BtnStyleSalesmen.xaml"/>
-                <ResourceDictionary Source="/Style/ListStyle.xaml"/>
-                <ResourceDictionary Source="/Style/ExpanderSTR.xaml"/>
+                
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

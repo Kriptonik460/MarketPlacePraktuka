@@ -8,7 +8,7 @@
         AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
         Background="Transparent"
         Title="Regustr" Height="480" Width="488">
-    <Border CornerRadius="25" BorderThickness="5" Background="#FF101126">
+    <Border CornerRadius="25" BorderThickness="5" Background="#ff3a3a3a">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="81*"/>
@@ -31,7 +31,7 @@
                 <RowDefinition/>
                 <RowDefinition Height=" 1.25*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" CornerRadius="25 25 0 0" Background="#FF251F45" MouseDown="ToolBar_MouseDown" Grid.ColumnSpan="3"  >
+            <Border Grid.Row="0" CornerRadius="25 25 0 0" Background="#FF232323" MouseDown="ToolBar_MouseDown" Grid.ColumnSpan="3"  >
 
                 <Grid  Name="ToolBar"  >
 
@@ -148,17 +148,17 @@
                     </TextBlock.Style>
                 </TextBlock>
             </Grid>
-            <ComboBox x:Name="TypeUserCB" Grid.Row="12" Grid.Column="1" FontSize="20" SelectedIndex="0" Style="{DynamicResource CustomComboBoxStyle }" >
+            <ComboBox x:Name="TypeUserCB" Grid.Row="12" Grid.Column="1" FontSize="20" SelectedIndex="0"  >
                 <ComboBoxItem  >
-                    <TextBlock Text="Клиент" FontSize="20"/>
+                    <TextBlock Text="Клиент" FontSize="20"  Foreground="White"/>
                 </ComboBoxItem>
                 <ComboBoxItem  >
-                    <TextBlock Text="Продавец" FontSize="20"/>
+                    <TextBlock Text="Продавец" FontSize="20" Foreground="White"/>
                 </ComboBoxItem>
             </ComboBox>
 
-            <Button Content="Регистрация" x:Name="Reg" FontSize="20" Background="Transparent" Grid.Row="13" Grid.Column="1" Click="Reg_Click" Style="{DynamicResource BTNSTL}"  />
-            <Button Content="Вернуться" x:Name="Back" FontSize="20" Background="Transparent" Grid.Row="0" Grid.Column="1" Click="Back_Click" Style="{DynamicResource BTNSTL}"  />
+            <Button Content="Регистрация" x:Name="Reg" FontSize="20"  Grid.Row="13" Grid.Column="1" Click="Reg_Click"   />
+            <Button Content="Вернуться" x:Name="Back" FontSize="20"  Grid.Row="0" Grid.Column="1" Click="Back_Click"   />
 
 
         </Grid>

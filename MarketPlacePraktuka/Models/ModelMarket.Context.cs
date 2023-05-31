@@ -13,10 +13,10 @@ namespace MarketPlacePraktuka.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MarketPlaceEntitiesHome : DbContext
+    public partial class MarketPlaceEntities1 : DbContext
     {
-        public MarketPlaceEntitiesHome()
-            : base("name=MarketPlaceEntitiesHome")
+        public MarketPlaceEntities1()
+            : base("name=MarketPlaceEntities1")
         {
         }
     

@@ -5,10 +5,77 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.Salesman"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800" Background="#ff3a3a3a"
+    
       Title="SettingPageSaleaman">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Margin="10">
+            <Grid>
+                <TextBox Background="White" Padding="20 0 25 0" x:Name="Search" FontSize="20" TextChanged="TextBox_TextChanged"/>
+                <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" Margin="2"/>
+                <StackPanel Orientation="Vertical">
+                    
+                <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="AddAdress" Click="AddAdress_Click">
+                    <materialDesign:PackIcon Kind="Add"/>
+                </Button>
+         
+                </StackPanel>
+            </Grid>
+           
+                <ListView x:Name="PointAdress"
+                  
+                  ItemsSource="{Binding addresses}"
+                  FontFamily="Trebuchet MS"
+                  FontSize="22"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
+                            <TextBlock  Text="{Binding lat}" FontSize="20" />
+                            <TextBlock  Text="{Binding lot}" FontSize="20" />
+                            <Button Content="Показать"
+                                    Command="{Binding DataContext.NavigateToAddressCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                    
+                </ListView.ItemTemplate>
+                   
+                </ListView>
+
+   
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Visibility="Collapsed" x:Name="PanelAdress">
+            <TextBlock Text="Название точки" Foreground="White" FontSize="20"/>
+            <TextBox  FontSize="18" x:Name="NameAdress" BorderBrush="White" BorderThickness="2" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
+            <TextBlock Text="Координаты точки lat" Foreground="White" FontSize="20"/>
+            <TextBox FontSize="18" BorderBrush="White" x:Name="LatPoint" BorderThickness="2" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
+            <TextBlock Text="Координаты точки lot" Foreground="White" FontSize="20"/>
+            <TextBox FontSize="18" BorderBrush="White" BorderThickness="2" x:Name="LotPoint" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
+            <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="SaveAdress" Click="SaveAdress_Click">
+                <materialDesign:PackIcon Kind="Add"/>
+            </Button>
+        </StackPanel>
+        <m:Map Mode="AerialWithLabels" Grid.Column="1" Grid.Row="1" ZoomLevel="16" x:Name="Map">
+        </m:Map>
     </Grid>
 </Page>

@@ -37,7 +37,7 @@
             <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
         </EventTrigger>
     </Window.Triggers>-->
-    <Border x:Name="border"   Background="#FF101126">
+    <Border x:Name="border"   Background="#ff3a3a3a">
         <!--<Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
         </Border.BorderBrush>-->
@@ -47,7 +47,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border   Background="#FF251F45" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+            <Border   Background="#ff3a3a3a" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
 
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
@@ -88,25 +88,25 @@
                     <RowDefinition Height="80"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF19162B">
-                    <Button Background="Transparent" Foreground="Transparent" x:Name="Product" Margin="10 10 10 10" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}" Cursor="Hand" Click="Product_Click">
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#ff3a3a3a" > 
+                    <Button Background="Transparent" Foreground="Transparent" x:Name="Product" Margin="10 10 10 10" BorderBrush="Transparent"  Height="50" Cursor="Hand" Click="Product_Click">
                         <Button.Content>
                             <fa:ImageAwesome Icon="Search" Foreground="White"  />
                         </Button.Content>
                     </Button>
 
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Setting" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}" Click="Setting_Click">
+                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Setting" BorderBrush="Transparent"  Click="Setting_Click" Height="50" >
                         <Button.Content>
                             <fa:ImageAwesome Icon="Certificate" Foreground="White" />
                         </Button.Content>
                     </Button>
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="User" Click="User_Click" BorderBrush="Transparent" Style="{DynamicResource NavigationButtonStyle}">
+                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="User" Click="User_Click" BorderBrush="Transparent" Height="50" >
                         <Button.Content>
                             <fa:ImageAwesome Icon="User" Foreground="White" />
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <Frame x:Name="FrameSalesmen" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" />
+                <Frame x:Name="FrameSalesmen" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden"  />
                 <Grid Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" >
 
                     <Border x:Name="myBorder" Width="200" Height="50" BorderThickness="2" BorderBrush="Black">

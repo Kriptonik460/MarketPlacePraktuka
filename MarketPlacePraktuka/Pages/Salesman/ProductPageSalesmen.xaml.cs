@@ -244,16 +244,15 @@ namespace MarketPlacePraktuka.Pages.Salesman
                 TempProduct.ID_Status = 3;
                 App.DB.Product.Add(TempProduct);
             }
-            App.DB.SaveChanges();
-            MainPageSalesman.Instance.FrameSalesmen.Navigate(new ProductPageSalesmen());
+            App.DB.SaveChangesAsync();
 
         }
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
         {
             App.DB.Product.Remove(TempProduct);
-            App.DB.SaveChanges();
-            MainPageSalesman.Instance.FrameSalesmen.Navigate(new ProductPageSalesmen());
+            App.DB.SaveChangesAsync();
+            TempProduct = null;
         }
 
         private void ImangeBtn_Click(object sender, RoutedEventArgs e)
@@ -321,7 +320,11 @@ namespace MarketPlacePraktuka.Pages.Salesman
                 PhotoImg.Source = ImageConverter.ConvertToImageSource(photos[0].Photo);
             }
             else
-                PhotoImg.Source = new BitmapImage { UriSource = new Uri(@"C:\Users\makki\Source\Repos\MarketPlacePraktuka2\MarketPlacePraktuka\Source\free-icon-no-photo-5540531.png") };
+            {
+                LeftBtn.Visibility = Visibility.Collapsed;
+                RightBtn.Visibility = Visibility.Collapsed;
+                PhotoImg.Source = new BitmapImage { UriSource = new Uri(@"C:\Users\user\source\repos\MarketPlacePraktuka\MarketPlacePraktuka\Source\free-icon-no-photo-5540531.png") };
+            }
 
         }
         
@@ -330,8 +333,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
         {
 
             App.DB.PhotoProduct.Remove(photos[IndexPhoto]);
-            App.DB.SaveChanges();
-            MainPageSalesman.Instance.FrameSalesmen.Navigate(new ProductPageSalesmen());
+            App.DB.SaveChangesAsync();
 
         }
     }
