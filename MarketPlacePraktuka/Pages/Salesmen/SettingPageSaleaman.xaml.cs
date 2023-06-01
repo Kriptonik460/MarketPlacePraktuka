@@ -3,9 +3,11 @@ using MaterialDesignThemes.Wpf;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MarketPlacePraktuka.Pages.Salesman
+namespace MarketPlacePraktuka.Pages.Salesmen
 {
     /// <summary>
     /// Логика взаимодействия для SettingPageSaleaman.xaml
@@ -30,7 +32,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
         {
             InitializeComponent();
             App.DB.Address.Load();
-
+            Map.CredentialsProvider = new ApplicationIdCredentialsProvider("jmnQMChUewby61QPp8yX~UybthbuvuTzuf1YdRN_Orw~Ar6qcJOEb8zAFDtoD9ruug36AYHRHXqrPeIbXHFYT0K50oPfxXpGmbzDcrNx-YrO");
             var addresses = App.DB.Address.ToList();
             PointAdress.ItemsSource = App.DB.Address.ToList();
 
@@ -68,6 +70,20 @@ namespace MarketPlacePraktuka.Pages.Salesman
         public static readonly DependencyProperty addressesProperty =
             DependencyProperty.Register("addresses", typeof(List<Address>), typeof(Address));
 
+
+
+        public Address Address
+        {
+            get { return (Address)GetValue(addressProperty); }
+            set { SetValue(addressProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for address.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty addressProperty =
+            DependencyProperty.Register("address", typeof(Address), typeof(Address));
+
+
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var search = Search.Text.Trim();
@@ -85,6 +101,13 @@ namespace MarketPlacePraktuka.Pages.Salesman
         public ICommand NavigateToAddressCommand => _navigateToAddressCommand ?? (_navigateToAddressCommand = new RelayCommand<Address>(NavigateToPoint));
         private void NavigateToPoint(Address address)
         {
+            PanelAdress.Visibility = Visibility.Visible;
+            Address = address;
+
+            NameAdress.Text = Address.Name;
+            LatPoint.Text = Address.lat.ToString();
+            LotPoint.Text = Address.lot.ToString();
+
             var latitude = (double)address.lat;
             var longitude = (double)address.lot;
             Location newLocation = new Location(latitude, longitude);
@@ -95,20 +118,30 @@ namespace MarketPlacePraktuka.Pages.Salesman
         private void AddAdress_Click(object sender, RoutedEventArgs e)
         {
             PanelAdress.Visibility = Visibility.Visible;
+            Address = new Address();
+        }
+         
+        public ObservableCollection<List<Address>> Adresses { get; private set; } = new ObservableCollection<List<Address>>();
+        private async void SaveAdress_Click(object sender, RoutedEventArgs e)
+        {
+            if (Address.ID == 0)
+            {
+                Address.Name = NameAdress.Text;
+                Address.lat = Convert.ToDecimal(LatPoint.Text);
+                Address.lot = Convert.ToDecimal(LotPoint.Text);
+                App.DB.Address.Add(Address);
+            }
+            await App.DB.SaveChangesAsync();
+            NavigationService.Refresh();
+            PanelAdress.Visibility = Visibility.Collapsed;
+            PointAdress.ItemsSource = Adresses; 
         }
 
-        private void SaveAdress_Click(object sender, RoutedEventArgs e)
+        private async void DeleAdress_Click(object sender, RoutedEventArgs e)
         {
-            addresses = new List<Address>();
-
-            addresses.Add(new Address()
-            {
-                Name = NameAdress.Text,
-                lat = Convert.ToDecimal(LatPoint.Text),
-                lot = Convert.ToDecimal(LotPoint.Text)
-
-            });
-            App.DB.SaveChangesAsync();
+            App.DB.Address.Remove(Address);
+            await App.DB.SaveChangesAsync();
+            PointAdress.ItemsSource = App.DB.Address.ToList();
             PanelAdress.Visibility = Visibility.Collapsed;
         }
     }

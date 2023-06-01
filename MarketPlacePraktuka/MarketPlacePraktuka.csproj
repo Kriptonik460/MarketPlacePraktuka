@@ -350,15 +350,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Salesman\MainPageSalesman.xaml">
+    <Page Include="Pages\Salesmen\MainPageSalesman.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Salesman\ProductPageSalesmen.xaml">
+    <Page Include="Pages\Salesmen\PageInfoSalesmen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Salesman\SettingPageSaleaman.xaml">
+    <Page Include="Pages\Salesmen\ProductPageSalesmen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Salesmen\SettingPageSaleaman.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -368,13 +372,16 @@
     <Compile Include="Pages\Regustr.xaml.cs">
       <DependentUpon>Regustr.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Salesman\MainPageSalesman.xaml.cs">
+    <Compile Include="Pages\Salesmen\MainPageSalesman.xaml.cs">
       <DependentUpon>MainPageSalesman.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Salesman\ProductPageSalesmen.xaml.cs">
+    <Compile Include="Pages\Salesmen\PageInfoSalesmen.xaml.cs">
+      <DependentUpon>PageInfoSalesmen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Salesmen\ProductPageSalesmen.xaml.cs">
       <DependentUpon>ProductPageSalesmen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Salesman\SettingPageSaleaman.xaml.cs">
+    <Compile Include="Pages\Salesmen\SettingPageSaleaman.xaml.cs">
       <DependentUpon>SettingPageSaleaman.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -438,6 +445,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HeplClasses\MapClasses\" />
+    <Folder Include="Pages\Employee\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

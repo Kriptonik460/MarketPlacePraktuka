@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MarketPlacePraktuka.Pages.Salesman
+namespace MarketPlacePraktuka.Pages.Salesmen
 {
     /// <summary>
     /// Логика взаимодействия для ProductPageSalesmen.xaml
@@ -41,7 +41,7 @@ namespace MarketPlacePraktuka.Pages.Salesman
         {
             get { return (Product)GetValue(TempProductProperty); }
             set { SetValue(TempProductProperty, value); }
-        }
+            }
 
         // Using a DependencyProperty as the backing store for TempOroduct.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TempProductProperty =

@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="lat" Type="decimal" Precision="8" Scale="6" />
-          <Property Name="lot" Type="decimal" Precision="9" Scale="0" />
+          <Property Name="lot" Type="decimal" Precision="9" Scale="6" />
         </EntityType>
         <EntityType Name="Basket">
           <Key>
@@ -409,7 +409,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="lat" Type="Decimal" Precision="8" Scale="6" />
-          <Property Name="lot" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="lot" Type="Decimal" Precision="9" Scale="6" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_Address" FromRole="Address" ToRole="Order" />
         </EntityType>
         <EntityType Name="Basket">
