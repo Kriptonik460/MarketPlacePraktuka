@@ -31,6 +31,14 @@ namespace MarketPlacePraktuka.Pages.Salesmen
         public SettingPageSaleaman()
         {
             InitializeComponent();
+            if (App.DB.Salesman.FirstOrDefault(x => x.ID == SaveSomeData.user.ID) != null) 
+            {
+                AddAdress.Visibility = Visibility.Collapsed; // добавь для админа Visible
+            }
+            else
+            {
+                AddAdress.Visibility = Visibility.Visible;
+            }
             App.DB.Address.Load();
             Map.CredentialsProvider = new ApplicationIdCredentialsProvider("jmnQMChUewby61QPp8yX~UybthbuvuTzuf1YdRN_Orw~Ar6qcJOEb8zAFDtoD9ruug36AYHRHXqrPeIbXHFYT0K50oPfxXpGmbzDcrNx-YrO");
             var addresses = App.DB.Address.ToList();
@@ -119,6 +127,9 @@ namespace MarketPlacePraktuka.Pages.Salesmen
         {
             PanelAdress.Visibility = Visibility.Visible;
             Address = new Address();
+            NameAdress.Clear();
+            LatPoint.Clear();
+            LotPoint.Clear();
         }
          
         public ObservableCollection<List<Address>> Adresses { get; private set; } = new ObservableCollection<List<Address>>();
@@ -133,8 +144,8 @@ namespace MarketPlacePraktuka.Pages.Salesmen
             }
             await App.DB.SaveChangesAsync();
             NavigationService.Refresh();
+            PointAdress.ItemsSource = App.DB.Address.ToList();
             PanelAdress.Visibility = Visibility.Collapsed;
-            PointAdress.ItemsSource = Adresses; 
         }
 
         private async void DeleAdress_Click(object sender, RoutedEventArgs e)

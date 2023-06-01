@@ -28,7 +28,7 @@
                 <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" Margin="2"/>
                 <StackPanel Orientation="Vertical">
                     
-                <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="AddAdress" Click="AddAdress_Click">
+                <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="AddAdress" Click="AddAdress_Click" Visibility="Collapsed">
                     <materialDesign:PackIcon Kind="Add"/>
                 </Button>
          
@@ -72,7 +72,7 @@
             <TextBlock Text="Координаты точки lot" Foreground="White" FontSize="20"/>
             <TextBox FontSize="18" BorderBrush="White" BorderThickness="2" Text="{Binding lot}" x:Name="LotPoint" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
             <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="SaveAdress" Click="SaveAdress_Click">
-                <materialDesign:PackIcon Kind="Add"/>
+                <materialDesign:PackIcon Kind="Loading"/>
             </Button>
             <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="DeleAdress" Click="DeleAdress_Click">
                 <materialDesign:PackIcon Kind="Delete"/>

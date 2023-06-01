@@ -271,6 +271,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Employee\MainWindowEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Employee\ProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -341,6 +349,12 @@
     </Compile>
     <Compile Include="Pages\Client\MainPageClient.xaml.cs">
       <DependentUpon>MainPageClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Employee\MainWindowEmp.xaml.cs">
+      <DependentUpon>MainWindowEmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Employee\ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -445,7 +459,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HeplClasses\MapClasses\" />
-    <Folder Include="Pages\Employee\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MarketPlacePraktuka.Models;
 using MarketPlacePraktuka.Pages.Client;
+using MarketPlacePraktuka.Pages.Employee;
 using MarketPlacePraktuka.Pages.Salesmen;
 
 namespace MarketPlacePraktuka.Pages
@@ -81,6 +82,11 @@ namespace MarketPlacePraktuka.Pages
                     if (App.DB.Salesman.FirstOrDefault(x => x.User.ID == cd.ID) != null)
                     {
                         new MainPageSalesmen().Show();
+                        Close();
+                    }
+                    if (App.DB.Employee.FirstOrDefault(x => x.User.ID == cd.ID) != null)
+                    {
+                        new MainWindowEmp().Show();
                         Close();
                     }
                 }
