@@ -77,7 +77,7 @@
                 </TextBlock.Style>
             </TextBlock>
 
-            <TextBox  x:Name="PasswordTb"  Foreground="White" Grid.Row="4" Background="Transparent" Grid.Column="1"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0"   />
+            <TextBox  x:Name="PasswordTb"  Foreground="White" Grid.Row="4" Background="Transparent" Grid.Column="1"   VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0"   />
 
 
             <TextBlock IsHitTestVisible="False" FontSize="20" Text="Пароль"  Foreground="White" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center">

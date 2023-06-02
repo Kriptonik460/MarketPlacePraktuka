@@ -180,20 +180,20 @@
                         <TextBlock Text="Наименование" FontSize="20" Foreground="White"/>
 
 
-                        <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
+                        <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap" Foreground="White"/>
 
-                        <TextBlock Text="Описание" FontSize="20" Foreground="White"/>
-                        <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="NoWrap"/>
+                        <TextBlock Text="Описание" FontSize="20" Foreground="White" />
+                        <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="NoWrap" Foreground="White"/>
                         <TextBlock Text="Характеристика" FontSize="20" Foreground="White"/>
-                        <TextBox  Text="{Binding Characteristics}" FontSize="20" TextWrapping="NoWrap"/>
+                        <TextBox  Text="{Binding Characteristics}" FontSize="20" TextWrapping="NoWrap" Foreground="White"/>
                         <TextBlock Text="Категория" FontSize="20" Foreground="White"/>
-                        <ComboBox SelectedItem="{Binding Category }" x:Name="Categor"  DisplayMemberPath="Name" Height="40" />
+                        <ComboBox SelectedItem="{Binding Category }" x:Name="Categor" FontSize="20"  DisplayMemberPath="Name" Height="40" Foreground="White" />
                         <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
-                        <TextBox  Text="{Binding Count}" FontSize="20"/>
+                        <TextBox  Text="{Binding Count}" FontSize="20" Foreground="White"/>
                         <TextBlock Text="Цена" FontSize="20" Foreground="White"/>
-                        <TextBox  Text="{Binding Cost}" FontSize="20"/>
+                        <TextBox  Text="{Binding Cost}" FontSize="20" Foreground="White"/>
                         <TextBlock Text="Скидка" FontSize="20" Foreground="White"/>
-                        <TextBox  Text="{Binding Discount}" FontSize="20"/>
+                        <TextBox  Text="{Binding Discount}" FontSize="20" Foreground="White"/>
                     </StackPanel>
 
 
@@ -211,7 +211,7 @@
                                 </Style>
                             </Image.Style>
                         </Image>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
 
                             <Button HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="LeftBtn" Content="←"
                                 Click="Button_Click" Margin="5"/>
@@ -222,17 +222,24 @@
 
 
                     <StackPanel Orientation="Vertical" Margin="10">
-                        <StackPanel Orientation="Horizontal" Margin="5">
+                        <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
 
-                            <Button  Content="Добавить" Margin="5" 
+                            <StackPanel>
+                                
+                            <Button  Content="Добавить изображение" Margin="5" 
                                 x:Name="ImangeBtn" Click="ImangeBtn_Click" />
-                            <Button  Content="Удалить "  
-                                x:Name="ImangeDelBtn" Click="ImangeDelBtn_Click" />
-                        </StackPanel>
+                                <Button  Content="Удалить изображение"  
+                                x:Name="ImangeDelBtn" Click="ImangeDelBtn_Click" Margin="5" />
+                            </StackPanel>
+                            <StackPanel>
+                                
                         <Button  Content="Сохранить" 
-                                x:Name="SaveBtn" Click="SaveBtn_Click"/>
+                                x:Name="SaveBtn" Click="SaveBtn_Click"  Margin="5" />
                         <Button  Content="Удалить"
-                                x:Name="DelBtn" Click="DelBtn_Click"/>
+                                x:Name="DelBtn" Click="DelBtn_Click"  Margin="5" />
+                            </StackPanel>
+                        </StackPanel>
+                       
                     </StackPanel>
                 </StackPanel>
             </Grid>
