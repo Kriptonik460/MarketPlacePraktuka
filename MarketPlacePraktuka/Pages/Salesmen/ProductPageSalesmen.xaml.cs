@@ -263,7 +263,12 @@ namespace MarketPlacePraktuka.Pages.Salesmen
                 ID_Product = TempProduct.ID,
                 Photo = imageGetInExplorer
             });
+            if (Photo != null)
+            {
             App.DB.SaveChangesAsync();
+                return;
+            }
+
             View.Refresh();
 
         }

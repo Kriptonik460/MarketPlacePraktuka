@@ -267,7 +267,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\Client\MainPageClient.xaml">
+    <Page Include="Pages\Employee\CategorySettingInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,6 +276,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Employee\ProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Employee\SalesmanPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Employee\UserPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -347,14 +355,20 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Client\MainPageClient.xaml.cs">
-      <DependentUpon>MainPageClient.xaml</DependentUpon>
+    <Compile Include="Pages\Employee\CategorySettingInfo.xaml.cs">
+      <DependentUpon>CategorySettingInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Employee\MainWindowEmp.xaml.cs">
       <DependentUpon>MainWindowEmp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Employee\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Employee\SalesmanPageControl.xaml.cs">
+      <DependentUpon>SalesmanPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Employee\UserPageControl.xaml.cs">
+      <DependentUpon>UserPageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

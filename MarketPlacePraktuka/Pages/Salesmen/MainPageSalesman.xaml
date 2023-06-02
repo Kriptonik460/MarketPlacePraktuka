@@ -37,7 +37,7 @@
             <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
         </EventTrigger>
     </Window.Triggers>-->
-    <Border x:Name="border"   Background="#ff3a3a3a">
+    <Border x:Name="border"   Background="#FF1F1E29">
         <!--<Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
         </Border.BorderBrush>-->
@@ -47,7 +47,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border   Background="#ff3a3a3a" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+            <Border   Background="#FF1F1E29" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
 
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
@@ -88,7 +88,7 @@
                     <RowDefinition Height="80"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#ff3a3a3a" > 
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF1F1E29" > 
                     <Button Background="Transparent" Foreground="Transparent" x:Name="Product" Margin="10 10 10 10" BorderBrush="Transparent"  Height="50" Cursor="Hand" Click="Product_Click">
                         <Button.Content>
                             <fa:ImageAwesome Icon="Search" Foreground="White"  />

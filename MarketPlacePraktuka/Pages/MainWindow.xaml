@@ -9,7 +9,7 @@
         Background="Transparent"
         Title="MainWindow" Height="480" Width="488" WindowStartupLocation="CenterScreen" >
 
-    <Border CornerRadius="25" BorderThickness="5" Background="#ff3a3a3a">
+    <Border CornerRadius="25" BorderThickness="5" Background="#FF1F1E29">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="81*"/>
@@ -61,7 +61,7 @@
                 </Grid>
             </Border>
 
-            <TextBox  x:Name="LoginTb"  Foreground="white"  Grid.Row="2"  Grid.Column="1"  BorderBrush="Transparent"  FontSize="18" VerticalAlignment="Center" Margin="5,0,5,0"   />
+            <TextBox  x:Name="LoginTb"  Foreground="white"  Grid.Row="2"  Grid.Column="1"  BorderBrush="White"  FontSize="18" VerticalAlignment="Center" Margin="5,0,5,0"   />
 
             <TextBlock IsHitTestVisible="False" FontSize="20" Text="Логин"  Foreground="White" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0" >
                 <TextBlock.Style>
@@ -77,7 +77,7 @@
                 </TextBlock.Style>
             </TextBlock>
 
-            <TextBox  x:Name="PasswordTb"  Foreground="white" Grid.Row="4" Background="Transparent" Grid.Column="1"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0"   />
+            <TextBox  x:Name="PasswordTb"  Foreground="White" Grid.Row="4" Background="Transparent" Grid.Column="1"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0"   />
 
 
             <TextBlock IsHitTestVisible="False" FontSize="20" Text="Пароль"  Foreground="White" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center">

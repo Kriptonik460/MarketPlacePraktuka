@@ -52,6 +52,21 @@ namespace MarketPlacePraktuka.Pages.Employee
         {
             FrameSalesmen.Navigate(new ProductPage());
         }
+
+        private void Categor_Click(object sender, RoutedEventArgs e)
+        {
+            FrameSalesmen.Navigate(new CategorySettingInfo());
+        }
+
+        private void User_Click(object sender, RoutedEventArgs e)
+        {
+            FrameSalesmen.Navigate(new UserPageControl());
+        }
+
+        private void Sales_Click(object sender, RoutedEventArgs e)
+        {
+            FrameSalesmen.Navigate(new SalesmanPageControl());
+        }
     }
 
 }

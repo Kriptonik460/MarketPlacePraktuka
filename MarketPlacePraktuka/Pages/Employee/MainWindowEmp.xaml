@@ -8,13 +8,13 @@
         WindowState="Maximized"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="MainWindowEmp" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None"  Background="Transparent" BorderBrush="Transparent">
-    <Grid Background="#ff3a3a3a">
+    <Grid Background="#FF1F1E29">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border   Background="#ff3a3a3a" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+            <Border   Background="#FF1F1E29" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
 
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
@@ -55,13 +55,13 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#ff3a3a3a" Width="100"  >
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF1F1E29" Width="100"  >
                     <Button Background="Transparent"  x:Name="Product" Margin="10 10 10 10" Click="Product_Click"   >
                      
                             <materialDesign:PackIcon Kind="Create" />
                         
                     </Button>
-                    <Button Background="Transparent"  x:Name="Categor" Margin="10 10 10 10"   >
+                    <Button Background="Transparent"  x:Name="Categor" Margin="10 10 10 10" Click="Categor_Click"   >
 
                         <materialDesign:PackIcon Kind="Category" />
 
@@ -71,9 +71,13 @@
                             <materialDesign:PackIcon Kind="Map"/>
                         </Button.Content>
                     </Button>
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="User"   >
-                        <materialDesign:PackIcon Kind="Settings"/>
+                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="User" Click="User_Click"   >
+                        <materialDesign:PackIcon Kind="Men"/>
                        
+                    </Button>
+                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Sales" Click="Sales_Click"   >
+                        <materialDesign:PackIcon Kind="BoxAddOutline"/>
+
                     </Button>
                 </StackPanel>
                 <Frame x:Name="FrameSalesmen" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden"  />

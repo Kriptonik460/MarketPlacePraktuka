@@ -1,0 +1,86 @@
+﻿<Page x:Class="MarketPlacePraktuka.Pages.Employee.SalesmanPageControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.Employee"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SalesmanPageControl"
+      x:Name="Root">
+
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" MinWidth="147"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="120*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="UserList"
+                  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    Background="Transparent"
+                 d:ItemsSource="{d:SampleData ItemCount=5}"
+                  
+                  FontFamily="Trebuchet MS"
+                  FontSize="22"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"  >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical"
+                               />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <DockPanel Margin="25 5 25 10"   >
+                        <TextBlock  Text="{Binding ID, StringFormat='{}ID Гандона: {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top"/>
+                        <TextBlock  Text="{Binding NameCompany, StringFormat='{}Наименование компании гандона : {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top"/>
+                        <TextBlock  Text="{Binding Description, StringFormat='{}Описание гандона : {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top"/>
+                        <TextBlock  Text="{Binding DateOnMarketplace, StringFormat='{}На рынке с: {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" Cursor=""/>
+                        <TextBlock  Text="{Binding User.ID, StringFormat='{}ID: {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" Cursor=""/>
+                        <TextBlock  Text="{Binding User.Login, StringFormat='{}Логин: {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" Cursor=""/>
+                        <TextBlock  Text="{Binding User.Password, StringFormat='{}Пароль: {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" Cursor=""/>
+                        <TextBlock  Text="{Binding User.Removed, StringFormat='{}Статус: {0}', Converter={StaticResource BoolPresenter}}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" Cursor="" x:Name="Stat">
+
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Content="Забанить" Margin="5"
+                                    FontSize="18"
+                                    x:Name="DelBtn"
+                                    Command="{Binding DataContext.DelCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding}" />
+                            <Button Content="Спасти" Margin="5"
+                                    FontSize="18"
+                                    x:Name="SavelBtn"
+                                    Command="{Binding DataContext.SaveCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding}" />
+
+
+                        </StackPanel>
+
+                    </DockPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </Grid>
+</Page>

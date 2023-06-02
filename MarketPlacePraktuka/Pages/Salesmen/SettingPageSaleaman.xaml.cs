@@ -109,7 +109,15 @@ namespace MarketPlacePraktuka.Pages.Salesmen
         public ICommand NavigateToAddressCommand => _navigateToAddressCommand ?? (_navigateToAddressCommand = new RelayCommand<Address>(NavigateToPoint));
         private void NavigateToPoint(Address address)
         {
-            PanelAdress.Visibility = Visibility.Visible;
+           
+            if (App.DB.Salesman.FirstOrDefault(x => x.ID == SaveSomeData.user.ID) != null)
+            {
+                PanelAdress.Visibility = Visibility.Collapsed; // добавь для админа Visible
+            }
+            else
+            {
+                PanelAdress.Visibility = Visibility.Visible;
+            }
             Address = address;
 
             NameAdress.Text = Address.Name;

@@ -15,7 +15,7 @@
 
 
 
-    <Grid Background="#FF232222" >
+    <Grid Background="Transparent"  >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto"/>
@@ -35,20 +35,20 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
 
-                <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" >
+                <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" Background="Transparent" >
                     <Expander.Header>
                        Категория
                     </Expander.Header>
-                    <ItemsControl ItemsSource="{Binding Path=[0]}">
+                    <ItemsControl ItemsSource="{Binding Path=[0]}" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
+                                <WrapPanel Orientation="Horizontal" MaxWidth="1200" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </Expander>
 
-                <Expander Grid.Row="0" FontSize="15" Foreground="White"  HorizontalAlignment="Right" >
+                <Expander Grid.Row="0" FontSize="15" Foreground="White"  HorizontalAlignment="Right" Background="Transparent" >
                     <Expander.Header>
                         Статус
                     </Expander.Header>
@@ -62,7 +62,7 @@
                 </Expander>
             </StackPanel>
 
-            <Grid HorizontalAlignment="Left" Grid.Row="0" >
+            <Grid HorizontalAlignment="Left" Grid.Row="0" Background="Transparent" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -95,7 +95,7 @@
         <ListView x:Name="ListProduct"
                   Grid.Column="0" Grid.Row="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    Background="#ff3a3a3a"
+                    Background="Transparent"
                   ItemsSource="{Binding View}"
                   d:ItemsSource="{d:SampleData ItemCount=5}"
                   FontFamily="Trebuchet MS"
@@ -108,7 +108,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="25" Margin="5 5 5 5" Height="350" Width="320" Background="#ff3a3a3a" BorderBrush="Transparent" BorderThickness="2">
+                    <Border CornerRadius="25" Margin="5 5 5 5" Height="350" Width="320" Background="Transparent" BorderBrush="Transparent" BorderThickness="2">
                         <DockPanel Margin="25 5 25 10" >
                             <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"
                                         DockPanel.Dock="Top"/>
@@ -135,7 +135,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#ff3a3a3a" x:Name="Opusanue"
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="Transparent" x:Name="Opusanue"
                       VerticalScrollBarVisibility="Hidden"
                       DataContext="{Binding TempProduct}">
             <ScrollViewer.Style>

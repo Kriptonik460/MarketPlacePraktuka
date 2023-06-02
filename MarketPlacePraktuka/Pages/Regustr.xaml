@@ -8,7 +8,7 @@
         AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
         Background="Transparent"
         Title="Regustr" Height="480" Width="488">
-    <Border CornerRadius="25" BorderThickness="5" Background="#ff3a3a3a">
+    <Border CornerRadius="25" BorderThickness="5" Background="#FF1F1E29">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="81*"/>

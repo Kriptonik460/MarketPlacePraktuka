@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MarketPlacePraktuka.Models;
-using MarketPlacePraktuka.Pages.Client;
 using MarketPlacePraktuka.Pages.Employee;
 using MarketPlacePraktuka.Pages.Salesmen;
 
@@ -64,31 +63,41 @@ namespace MarketPlacePraktuka.Pages
             }
             else
             {
-            User cd = App.DB.User.FirstOrDefault(x => x.Login == LoginTb.Text.Trim() && x.Password == PasswordTb.Text.Trim());
-            if (cd == null)
-            {
-                MessageBox.Show("Неверная авторизация");
-            }
-            else
-            {
-                SaveSomeData.user = cd;
-                LoginTb.Text = string.Empty;
-                PasswordTb.Text = string.Empty;
-                    if (App.DB.Client.FirstOrDefault(x => x.User.ID == cd.ID) != null)
-                    {
-                        new MainPageClient().Show();
-                        Close();
-                    }
-                    if (App.DB.Salesman.FirstOrDefault(x => x.User.ID == cd.ID) != null)
-                    {
-                        new MainPageSalesmen().Show();
-                        Close();
-                    }
-                    if (App.DB.Employee.FirstOrDefault(x => x.User.ID == cd.ID) != null)
-                    {
-                        new MainWindowEmp().Show();
-                        Close();
-                    }
+                User cd = App.DB.User.FirstOrDefault(x => x.Login == LoginTb.Text.Trim() && x.Password == PasswordTb.Text.Trim());
+                if (cd == null)
+                {
+                    MessageBox.Show("Неверная авторизация");
+                }
+                else
+                {
+                        if(cd.Removed == true)
+                        {
+                            MessageBox.Show("пошел нахуй ты в бане");
+                            LoginTb.Text = string.Empty;
+                            PasswordTb.Text = string.Empty;
+                        }
+                        else
+                        {
+
+                        SaveSomeData.user = cd;
+                        LoginTb.Text = string.Empty;
+                        PasswordTb.Text = string.Empty;
+                        if (App.DB.Client.FirstOrDefault(x => x.User.ID == cd.ID) != null)
+                        {
+                       
+                            Close();
+                        }
+                        if (App.DB.Salesman.FirstOrDefault(x => x.User.ID == cd.ID) != null)
+                        {
+                            new MainPageSalesmen().Show();
+                            Close();
+                        }
+                        if (App.DB.Employee.FirstOrDefault(x => x.User.ID == cd.ID) != null)
+                        {
+                            new MainWindowEmp().Show();
+                            Close();
+                        }
+                        }
                 }
 
             }
