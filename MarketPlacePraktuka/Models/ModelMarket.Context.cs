@@ -13,10 +13,10 @@ namespace MarketPlacePraktuka.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MarketPlaceEntities1 : DbContext
+    public partial class MarketPlaceEntities : DbContext
     {
-        public MarketPlaceEntities1()
-            : base("name=MarketPlaceEntities1")
+        public MarketPlaceEntities()
+            : base("name=MarketPlaceEntities")
         {
         }
     
@@ -38,5 +38,6 @@ namespace MarketPlacePraktuka.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<ProductListOrder> ProductListOrder { get; set; }
     }
 }

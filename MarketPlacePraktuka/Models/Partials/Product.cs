@@ -19,5 +19,6 @@ namespace MarketPlacePraktuka.Models
 
             }
         }
+        public int CountProductInBasket => ProductList.Where(pl => pl.Basket.ID_Client == SaveSomeData.client?.ID).FirstOrDefault()?.Count ?? 0;
     }
 }

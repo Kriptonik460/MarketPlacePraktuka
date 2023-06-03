@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MarketPlacePraktuka.Models;
+using MarketPlacePraktuka.Pages.ClientWok;
 using MarketPlacePraktuka.Pages.Employee;
 using MarketPlacePraktuka.Pages.Salesmen;
 
@@ -84,7 +85,7 @@ namespace MarketPlacePraktuka.Pages
                         PasswordTb.Text = string.Empty;
                         if (App.DB.Client.FirstOrDefault(x => x.User.ID == cd.ID) != null)
                         {
-                       
+                       new MainPageClientWok().Show();
                             Close();
                         }
                         if (App.DB.Salesman.FirstOrDefault(x => x.User.ID == cd.ID) != null)

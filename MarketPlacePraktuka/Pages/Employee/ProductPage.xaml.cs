@@ -27,14 +27,12 @@ namespace MarketPlacePraktuka.Pages.Employee
         {
             InitializeComponent();
             DataContext = this;
-
             App.DB.Product.Load();
             RefreshProductList();
         }
 
         private void RefreshProductList() =>
             ListProduct.ItemsSource = App.DB.Product.Where(e => e.ID_Status == 3).ToList();
-
 
         private ICommand _yesCommand;
         public ICommand YesCommand => _yesCommand ?? (_yesCommand = new RelayCommand<Product>((Product product) =>

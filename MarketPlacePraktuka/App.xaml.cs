@@ -16,13 +16,17 @@ namespace MarketPlacePraktuka
     public partial class App : Application
     {
         //public static MarketPlaceEntities DB = new MarketPlaceEntities();
-        public static MarketPlaceEntities1 DB = new MarketPlaceEntities1();
+        public static MarketPlaceEntities DB = new MarketPlaceEntities();
 
         public App()
         {
             DB.ProductList.Load();
             DB.Product.Load();
             DB.User.Load();
+            DB.PhotoProduct.Load();
+            DB.Client.Load();
+            DB.Address.Load();
+            DB.Basket.Load();
         }
     }
 }
