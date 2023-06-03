@@ -44,7 +44,7 @@ namespace MarketPlacePraktuka.Pages.ClientWok
 
 
         public ICommand _addCommand;
-        public ICommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand<Product>(async (Product product ) =>
+        public ICommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand<Product>((Product product ) =>
         {
            if(SaveSomeData.user.Client.FirstOrDefault().Basket.FirstOrDefault() == null)
             {
@@ -67,8 +67,8 @@ namespace MarketPlacePraktuka.Pages.ClientWok
                     });
                 else
                     productListItem.Count++;    
-              
-              await  App.DB.SaveChangesAsync();
+            
+                App.DB.SaveChangesAsync();
                 RefreshProductList();
             }
 
@@ -79,10 +79,9 @@ namespace MarketPlacePraktuka.Pages.ClientWok
 
 
             var productListItem = App.DB.ProductList.FirstOrDefault(pl => pl.ID_Product == product.ID);
-
             productListItem.Count--;
 
-            await App.DB.SaveChangesAsync();
+            App.DB.SaveChangesAsync();
             RefreshProductList();
         }));
 
