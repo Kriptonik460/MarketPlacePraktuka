@@ -27,7 +27,7 @@
                 <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" Margin="2"/>
                 <StackPanel Orientation="Vertical">
                     
-                <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="AddAdress" Click="AddAdress_Click" Visibility="Collapsed">
+                <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="AddAdress" Click="AddAdress_Click" Visibility="Visible">
                     <materialDesign:PackIcon Kind="Add"/>
                 </Button>
          

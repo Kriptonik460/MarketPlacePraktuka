@@ -267,11 +267,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\ClientWok\ClientInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientWok\ClientPageMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ClientWok\ClientProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ClientWok\MainPageClientWok.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientWok\OrderMakeWithProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientWok\ProductBeforeOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientWok\ProductListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,11 +386,26 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ClientWok\ClientInfoPage.xaml.cs">
+      <DependentUpon>ClientInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientWok\ClientPageMap.xaml.cs">
+      <DependentUpon>ClientPageMap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientWok\ClientProductPage.xaml.cs">
       <DependentUpon>ClientProductPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ClientWok\MainPageClientWok.xaml.cs">
       <DependentUpon>MainPageClientWok.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientWok\OrderMakeWithProduct.xaml.cs">
+      <DependentUpon>OrderMakeWithProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientWok\ProductBeforeOrder.xaml.cs">
+      <DependentUpon>ProductBeforeOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientWok\ProductListPage.xaml.cs">
+      <DependentUpon>ProductListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Employee\CategorySettingInfo.xaml.cs">
       <DependentUpon>CategorySettingInfo.xaml</DependentUpon>
@@ -490,6 +525,7 @@
       <DependentUpon>ModelMarket.edmx</DependentUpon>
       <LastGenOutput>ModelMarket.cs</LastGenOutput>
     </Content>
+    <Resource Include="Source\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

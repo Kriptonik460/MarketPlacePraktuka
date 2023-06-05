@@ -16,7 +16,7 @@ namespace MarketPlacePraktuka
     public partial class App : Application
     {
         //public static MarketPlaceEntities DB = new MarketPlaceEntities();
-        public static MarketPlaceEntities DB = new MarketPlaceEntities();
+        public static MarketPlaceEntities  DB = new MarketPlaceEntities();
 
         public App()
         {

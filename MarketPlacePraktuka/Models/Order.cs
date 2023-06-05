@@ -21,11 +21,11 @@ namespace MarketPlacePraktuka.Models
         }
     
         public int ID { get; set; }
-        public int ID_Basket { get; set; }
+        public int ID_Client { get; set; }
         public int ID_Address { get; set; }
     
         public virtual Address Address { get; set; }
-        public virtual Basket Basket { get; set; }
+        public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductListOrder> ProductListOrder { get; set; }
     }

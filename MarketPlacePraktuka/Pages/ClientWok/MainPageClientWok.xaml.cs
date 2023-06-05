@@ -1,4 +1,5 @@
-﻿using MarketPlacePraktuka.Pages.Salesmen;
+﻿using MarketPlacePraktuka.Models;
+using MarketPlacePraktuka.Pages.Salesmen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,13 @@ namespace MarketPlacePraktuka.Pages.ClientWok
     /// </summary>
     public partial class MainPageClientWok : Window
     {
+        public static MainPageClientWok Instance { get; private set; }
         public MainPageClientWok()
         {
             InitializeComponent();
+            Instance = this;
+            SaveSomeData.basket = App.DB.Basket.FirstOrDefault(pl => pl.ID_Client == SaveSomeData.client.ID && pl.Status == true);
+            FrameUser.Navigate(new ClientProductPage());
         }
 
         #region Функционал сверху
@@ -46,13 +51,10 @@ namespace MarketPlacePraktuka.Pages.ClientWok
 
         private void Basket_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameUser.Navigate(new ProductListPage());
         }
 
-        private void Map_Click(object sender, RoutedEventArgs e)
-        {
-            FrameUser.Navigate(new SettingPageSaleaman());
-        }
+       
 
         private void EmojiManProfile_Click(object sender, RoutedEventArgs e)
         {

@@ -1,10 +1,9 @@
 ﻿using MarketPlacePraktuka.Models;
+using MarketPlacePraktuka.Pages.Salesmen;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -20,25 +19,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MarketPlacePraktuka.Pages.Salesmen
+namespace MarketPlacePraktuka.Pages.ClientWok
 {
     /// <summary>
-    /// Логика взаимодействия для SettingPageSaleaman.xaml
+    /// Логика взаимодействия для ClientPageMap.xaml
     /// </summary>
-    public partial class SettingPageSaleaman : Page
+    public partial class ClientPageMap : Page
     {
-        
-        public SettingPageSaleaman()
+
+        public static Address address1;
+        public ClientPageMap()
         {
             InitializeComponent();
-            if (SaveSomeData.user.Client.FirstOrDefault() != null || SaveSomeData.user.Salesman.FirstOrDefault() != null  ) 
-            {
-                AddAdress.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                AddAdress.Visibility = Visibility.Visible;
-            }
             App.DB.Address.Load();
             Map.CredentialsProvider = new ApplicationIdCredentialsProvider("jmnQMChUewby61QPp8yX~UybthbuvuTzuf1YdRN_Orw~Ar6qcJOEb8zAFDtoD9ruug36AYHRHXqrPeIbXHFYT0K50oPfxXpGmbzDcrNx-YrO");
             var addresses = App.DB.Address.ToList();
@@ -65,18 +57,30 @@ namespace MarketPlacePraktuka.Pages.Salesmen
             var initialLocation = new Location((double)firstAddress.lat, (double)firstAddress.lot);
             //Map.Center = initialLocation;
             Map.SetView(initialLocation, 16);
-        }
-       
 
-        public List<Address> addresses
-        {
-            get { return (List<Address>)GetValue(addressesProperty); }
-            set { SetValue(addressesProperty, value); }
+
+
+            NameCard.Text = SaveSomeData.client.Surname;
+            DayCarg.Text = Convert.ToString(SaveSomeData.client.Month);
+            YearCarg.Text = Convert.ToString(SaveSomeData.client.Year);
+            string text = SaveSomeData.client.NumberOfCreditCard;
+            string newText = "";
+            for (int i = 0; i < text.Length; i++)
+            {
+                if ((i + 1) % 4 == 0) // если текущий символ - это каждый четвертый символ
+                    newText += text[i] + " "; // добавляем к новому тексту пробел после текущего символа
+                else
+                    newText += text[i]; // иначе добавляем только текущий символ к новому тексту
+            }
+
+            TextBlock1.Text = newText; 
+            SurnameTxt.Text = SaveSomeData.client.Surname;
+            NameTxt.Text = SaveSomeData.client.Name;
+            PatTxt.Text = SaveSomeData.client.Patronymic;
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty addressesProperty =
-            DependencyProperty.Register("addresses", typeof(List<Address>), typeof(Address));
+
+    
 
 
 
@@ -109,59 +113,45 @@ namespace MarketPlacePraktuka.Pages.Salesmen
         public ICommand NavigateToAddressCommand => _navigateToAddressCommand ?? (_navigateToAddressCommand = new RelayCommand<Address>(NavigateToPoint));
         private void NavigateToPoint(Address address)
         {
-           
-            if (App.DB.Salesman.FirstOrDefault(x => x.ID == SaveSomeData.user.ID) != null)
-            {
-                PanelAdress.Visibility = Visibility.Collapsed; // добавь для админа Visible
-            }
-            else
-            {
-                PanelAdress.Visibility = Visibility.Visible;
-            }
+
             Address = address;
-
-            NameAdress.Text = Address.Name;
-            LatPoint.Text = Address.lat.ToString();
-            LotPoint.Text = Address.lot.ToString();
-
             var latitude = (double)address.lat;
             var longitude = (double)address.lot;
             Location newLocation = new Location(latitude, longitude);
             Map.SetView(newLocation, 16);
             Map.Center = newLocation;
+            address1 = address;
+            AdressOrder.Text = address.Name;
+            
         }
 
-        private void AddAdress_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PanelAdress.Visibility = Visibility.Visible;
-            Address = new Address();
-            NameAdress.Clear();
-            LatPoint.Clear();
-            LotPoint.Clear();
-        }
-         
-        public ObservableCollection<List<Address>> Adresses { get; private set; } = new ObservableCollection<List<Address>>();
-        private async void SaveAdress_Click(object sender, RoutedEventArgs e)
-        {
-            if (Address.ID == 0)
+            if (address1 == null)
             {
-                Address.Name = NameAdress.Text;
-                Address.lat = Convert.ToDecimal(LatPoint.Text);
-                Address.lot = Convert.ToDecimal(LotPoint.Text);
-                App.DB.Address.Add(Address);
+                MessageBox.Show("Вы не выбрали точку выдачи");
             }
-            await App.DB.SaveChangesAsync();
-            NavigationService.Refresh();
-            PointAdress.ItemsSource = App.DB.Address.ToList();
-            PanelAdress.Visibility = Visibility.Collapsed;
-        }
+            else
+            {
+                var neworder = new Order()
+                {
+                ID_Address = address1.ID,
+                ID_Client = SaveSomeData.client.ID
+                };
+                App.DB.Order.Add(neworder);
 
-        private async void DeleAdress_Click(object sender, RoutedEventArgs e)
-        {
-            App.DB.Address.Remove(Address);
-            await App.DB.SaveChangesAsync();
-            PointAdress.ItemsSource = App.DB.Address.ToList();
-            PanelAdress.Visibility = Visibility.Collapsed;
+                foreach (var  item in App.DB.ProductList.Where(s => s.ID_Basket == SaveSomeData.basket.ID).ToList())
+                {
+                    App.DB.ProductListOrder.Add(new ProductListOrder()
+                    {
+                        Order = neworder,
+                        Product = item.Product,
+                        Count = item.Count
+                    });
+                }
+                SaveSomeData.basket.Status = false;
+                App.DB.SaveChanges();
+            }
         }
     }
 }

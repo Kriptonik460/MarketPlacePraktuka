@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MarketPlaceModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище MarketPlaceModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="ID" />
@@ -20,6 +20,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Client" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -43,6 +44,9 @@
           <Property Name="Patronymic" Type="nvarchar" MaxLength="150" />
           <Property Name="ID_User" Type="int" />
           <Property Name="NumberOfCreditCard" Type="nvarchar" MaxLength="16" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="CVV" Type="nvarchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -56,7 +60,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_Basket" Type="int" Nullable="false" />
+          <Property Name="ID_Client" Type="int" Nullable="false" />
           <Property Name="ID_Address" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PhotoProduct">
@@ -92,8 +96,6 @@
           <Property Name="ID_Basket" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "MarketPlace.dbo.ProductListOrder" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ProductListOrder">
           <Key>
             <PropertyRef Name="ID_Product" />
@@ -187,15 +189,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Basket1">
-          <End Role="Basket" Type="Self.Basket" Multiplicity="1" />
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Basket">
+            <Principal Role="Client">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Order">
-              <PropertyRef Name="ID_Basket" />
+              <PropertyRef Name="ID_Client" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -317,17 +319,11 @@
           <EntitySet Name="PhotoProduct" EntityType="Self.PhotoProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductList" EntityType="Self.ProductList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductListOrder" EntityType="Self.ProductListOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salesman" EntityType="Self.Salesman" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductListOrder" EntityType="Self.ProductListOrder" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ProductListOrder].[ID_Product] AS [ID_Product], 
-    [ProductListOrder].[ID_Order] AS [ID_Order], 
-    [ProductListOrder].[Count] AS [Count]
-    FROM [dbo].[ProductListOrder] AS [ProductListOrder]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Basket_Client" Association="Self.FK_Basket_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Basket" EntitySet="Basket" />
@@ -344,8 +340,8 @@
             <End Role="Address" EntitySet="Address" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Basket1" Association="Self.FK_Order_Basket1">
-            <End Role="Basket" EntitySet="Basket" />
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_PhotoProduct_Product1" Association="Self.FK_PhotoProduct_Product1">
@@ -385,20 +381,91 @@
             <End Role="Salesman" EntitySet="Salesman" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MarketPlaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MarketPlaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="MarketPlaceModel.Address" />
+          <EntitySet Name="Basket" EntityType="MarketPlaceModel.Basket" />
+          <EntitySet Name="Category" EntityType="MarketPlaceModel.Category" />
+          <EntitySet Name="Client" EntityType="MarketPlaceModel.Client" />
+          <EntitySet Name="Employee" EntityType="MarketPlaceModel.Employee" />
+          <EntitySet Name="Order" EntityType="MarketPlaceModel.Order" />
+          <EntitySet Name="PhotoProduct" EntityType="MarketPlaceModel.PhotoProduct" />
+          <EntitySet Name="Product" EntityType="MarketPlaceModel.Product" />
+          <EntitySet Name="ProductList" EntityType="MarketPlaceModel.ProductList" />
+          <EntitySet Name="ProductListOrder" EntityType="MarketPlaceModel.ProductListOrder" />
+          <EntitySet Name="Salesman" EntityType="MarketPlaceModel.Salesman" />
+          <EntitySet Name="Status" EntityType="MarketPlaceModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="MarketPlaceModel.sysdiagrams" />
+          <EntitySet Name="User" EntityType="MarketPlaceModel.User" />
+          <AssociationSet Name="FK_Order_Address" Association="MarketPlaceModel.FK_Order_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_Client" Association="MarketPlaceModel.FK_Basket_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductList_Basket" Association="MarketPlaceModel.FK_ProductList_Basket">
+            <End Role="Basket" EntitySet="Basket" />
+            <End Role="ProductList" EntitySet="ProductList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category1" Association="MarketPlaceModel.FK_Product_Category1">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_User" Association="MarketPlaceModel.FK_Client_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Client" Association="MarketPlaceModel.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_User" Association="MarketPlaceModel.FK_Employee_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListOrder_Order" Association="MarketPlaceModel.FK_ProductListOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ProductListOrder" EntitySet="ProductListOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoProduct_Product1" Association="MarketPlaceModel.FK_PhotoProduct_Product1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PhotoProduct" EntitySet="PhotoProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Salesman1" Association="MarketPlaceModel.FK_Product_Salesman1">
+            <End Role="Salesman" EntitySet="Salesman" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Status1" Association="MarketPlaceModel.FK_Product_Status1">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductList_Product" Association="MarketPlaceModel.FK_ProductList_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductList" EntitySet="ProductList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductListOrder_Product" Association="MarketPlaceModel.FK_ProductListOrder_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductListOrder" EntitySet="ProductListOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salesman_User" Association="MarketPlaceModel.FK_Salesman_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Salesman" EntitySet="Salesman" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="lat" Type="Decimal" Precision="10" Scale="6" />
           <Property Name="lot" Type="Decimal" Precision="10" Scale="6" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Address" FromRole="Address" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_Address" FromRole="Address" ToRole="Order" />
         </EntityType>
         <EntityType Name="Basket">
           <Key>
@@ -406,17 +473,17 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Client" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Basket_Client" FromRole="Basket" ToRole="Client" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Basket1" FromRole="Basket" ToRole="Order" />
-          <NavigationProperty Name="ProductList" Relationship="Self.FK_ProductList_Basket" FromRole="Basket" ToRole="ProductList" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Client" Relationship="MarketPlaceModel.FK_Basket_Client" FromRole="Basket" ToRole="Client" />
+          <NavigationProperty Name="ProductList" Relationship="MarketPlaceModel.FK_ProductList_Basket" FromRole="Basket" ToRole="ProductList" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category1" FromRole="Category" ToRole="Product" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_Product_Category1" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -428,8 +495,12 @@
           <Property Name="Patronymic" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ID_User" Type="Int32" />
           <Property Name="NumberOfCreditCard" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Basket" Relationship="Self.FK_Basket_Client" FromRole="Client" ToRole="Basket" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Client_User" FromRole="Client" ToRole="User" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="CVV" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Basket" Relationship="MarketPlaceModel.FK_Basket_Client" FromRole="Client" ToRole="Basket" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_Client_User" FromRole="Client" ToRole="User" />
+          <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_Client" FromRole="Client" ToRole="Order" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -437,49 +508,49 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="ID_User" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Employee_User" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_Employee_User" FromRole="Employee" ToRole="User" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Basket" Type="Int32" Nullable="false" />
+          <Property Name="ID_Client" Type="Int32" Nullable="false" />
           <Property Name="ID_Address" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_Order_Address" FromRole="Order" ToRole="Address" />
-          <NavigationProperty Name="Basket" Relationship="Self.FK_Order_Basket1" FromRole="Order" ToRole="Basket" />
-          <NavigationProperty Name="ProductListOrder" Relationship="Self.FK_ProductListOrder_Order" FromRole="Order" ToRole="ProductListOrder" />
+          <NavigationProperty Name="Address" Relationship="MarketPlaceModel.FK_Order_Address" FromRole="Order" ToRole="Address" />
+          <NavigationProperty Name="Client" Relationship="MarketPlaceModel.FK_Order_Client" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="ProductListOrder" Relationship="MarketPlaceModel.FK_ProductListOrder_Order" FromRole="Order" ToRole="ProductListOrder" />
         </EntityType>
         <EntityType Name="PhotoProduct">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ID_Product" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_PhotoProduct_Product1" FromRole="PhotoProduct" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_PhotoProduct_Product1" FromRole="PhotoProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Characteristics" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ID_Category" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Discount" Type="Int32" />
           <Property Name="ID_Salesman" Type="Int32" Nullable="false" />
           <Property Name="Removed" Type="Boolean" Nullable="false" />
           <Property Name="ID_Status" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category1" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="PhotoProduct" Relationship="Self.FK_PhotoProduct_Product1" FromRole="Product" ToRole="PhotoProduct" />
-          <NavigationProperty Name="Salesman" Relationship="Self.FK_Product_Salesman1" FromRole="Product" ToRole="Salesman" />
-          <NavigationProperty Name="Status" Relationship="Self.FK_Product_Status1" FromRole="Product" ToRole="Status" />
-          <NavigationProperty Name="ProductList" Relationship="Self.FK_ProductList_Product" FromRole="Product" ToRole="ProductList" />
-          <NavigationProperty Name="ProductListOrder" Relationship="Self.FK_ProductListOrder_Product" FromRole="Product" ToRole="ProductListOrder" />
+          <NavigationProperty Name="Category" Relationship="MarketPlaceModel.FK_Product_Category1" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="PhotoProduct" Relationship="MarketPlaceModel.FK_PhotoProduct_Product1" FromRole="Product" ToRole="PhotoProduct" />
+          <NavigationProperty Name="Salesman" Relationship="MarketPlaceModel.FK_Product_Salesman1" FromRole="Product" ToRole="Salesman" />
+          <NavigationProperty Name="Status" Relationship="MarketPlaceModel.FK_Product_Status1" FromRole="Product" ToRole="Status" />
+          <NavigationProperty Name="ProductList" Relationship="MarketPlaceModel.FK_ProductList_Product" FromRole="Product" ToRole="ProductList" />
+          <NavigationProperty Name="ProductListOrder" Relationship="MarketPlaceModel.FK_ProductListOrder_Product" FromRole="Product" ToRole="ProductListOrder" />
         </EntityType>
         <EntityType Name="ProductList">
           <Key>
@@ -489,8 +560,19 @@
           <Property Name="ID_Product" Type="Int32" Nullable="false" />
           <Property Name="ID_Basket" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
-          <NavigationProperty Name="Basket" Relationship="Self.FK_ProductList_Basket" FromRole="ProductList" ToRole="Basket" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductList_Product" FromRole="ProductList" ToRole="Product" />
+          <NavigationProperty Name="Basket" Relationship="MarketPlaceModel.FK_ProductList_Basket" FromRole="ProductList" ToRole="Basket" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_ProductList_Product" FromRole="ProductList" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductListOrder">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_ProductListOrder_Order" FromRole="ProductListOrder" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_ProductListOrder_Product" FromRole="ProductListOrder" ToRole="Product" />
         </EntityType>
         <EntityType Name="Salesman">
           <Key>
@@ -501,22 +583,22 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOnMarketplace" Type="DateTime" Precision="0" />
           <Property Name="ID_User" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Salesman1" FromRole="Salesman" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Salesman_User" FromRole="Salesman" ToRole="User" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_Product_Salesman1" FromRole="Salesman" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_Salesman_User" FromRole="Salesman" ToRole="User" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Status1" FromRole="Status" ToRole="Product" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_Product_Status1" FromRole="Status" ToRole="Product" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -530,24 +612,13 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Removed" Type="Boolean" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_User" FromRole="User" ToRole="Client" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
-          <NavigationProperty Name="Salesman" Relationship="Self.FK_Salesman_User" FromRole="User" ToRole="Salesman" />
-        </EntityType>
-        <EntityType Name="ProductListOrder">
-          <Key>
-            <PropertyRef Name="ID_Product" />
-            <PropertyRef Name="ID_Order" />
-          </Key>
-          <Property Name="ID_Product" Type="Int32" Nullable="false" />
-          <Property Name="ID_Order" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_ProductListOrder_Order" FromRole="ProductListOrder" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductListOrder_Product" FromRole="ProductListOrder" ToRole="Product" />
+          <NavigationProperty Name="Client" Relationship="MarketPlaceModel.FK_Client_User" FromRole="User" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="MarketPlaceModel.FK_Employee_User" FromRole="User" ToRole="Employee" />
+          <NavigationProperty Name="Salesman" Relationship="MarketPlaceModel.FK_Salesman_User" FromRole="User" ToRole="Salesman" />
         </EntityType>
         <Association Name="FK_Order_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="ID" />
@@ -558,8 +629,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Basket_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Basket" Role="Basket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
               <PropertyRef Name="ID" />
@@ -569,21 +640,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Basket1">
-          <End Role="Basket" Type="Self.Basket" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Basket">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ID_Basket" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductList_Basket">
-          <End Role="Basket" Type="Self.Basket" Multiplicity="1" />
-          <End Role="ProductList" Type="Self.ProductList" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Basket" Role="Basket" Multiplicity="1" />
+          <End Type="MarketPlaceModel.ProductList" Role="ProductList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Basket">
               <PropertyRef Name="ID" />
@@ -594,8 +653,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Category1">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="ID" />
@@ -606,8 +665,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Client_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.Client" Role="Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="ID" />
@@ -617,9 +676,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Client">
+          <End Type="MarketPlaceModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="ID" />
@@ -630,8 +701,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductListOrder_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="ProductListOrder" Type="Self.ProductListOrder" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="MarketPlaceModel.ProductListOrder" Role="ProductListOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="ID" />
@@ -642,8 +713,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PhotoProduct_Product1">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="PhotoProduct" Type="Self.PhotoProduct" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="MarketPlaceModel.PhotoProduct" Role="PhotoProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -654,8 +725,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Salesman1">
-          <End Role="Salesman" Type="Self.Salesman" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Salesman" Role="Salesman" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Salesman">
               <PropertyRef Name="ID" />
@@ -666,8 +737,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Status1">
-          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
               <PropertyRef Name="ID" />
@@ -678,8 +749,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductList_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ProductList" Type="Self.ProductList" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="MarketPlaceModel.ProductList" Role="ProductList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -690,8 +761,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductListOrder_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ProductListOrder" Type="Self.ProductListOrder" Multiplicity="*" />
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="MarketPlaceModel.ProductListOrder" Role="ProductListOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -702,8 +773,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Salesman_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Salesman" Type="Self.Salesman" Multiplicity="*" />
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.Salesman" Role="Salesman" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="ID" />
@@ -713,79 +784,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MarketPlaceEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Address" EntityType="Self.Address" />
-          <EntitySet Name="Basket" EntityType="Self.Basket" />
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="PhotoProduct" EntityType="Self.PhotoProduct" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="ProductList" EntityType="Self.ProductList" />
-          <EntitySet Name="Salesman" EntityType="Self.Salesman" />
-          <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="ProductListOrder" EntityType="Self.ProductListOrder" />
-          <AssociationSet Name="FK_Order_Address" Association="Self.FK_Order_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Basket_Client" Association="Self.FK_Basket_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Basket" EntitySet="Basket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Basket1" Association="Self.FK_Order_Basket1">
-            <End Role="Basket" EntitySet="Basket" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductList_Basket" Association="Self.FK_ProductList_Basket">
-            <End Role="Basket" EntitySet="Basket" />
-            <End Role="ProductList" EntitySet="ProductList" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Category1" Association="Self.FK_Product_Category1">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductListOrder_Order" Association="Self.FK_ProductListOrder_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="ProductListOrder" EntitySet="ProductListOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PhotoProduct_Product1" Association="Self.FK_PhotoProduct_Product1">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="PhotoProduct" EntitySet="PhotoProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Salesman1" Association="Self.FK_Product_Salesman1">
-            <End Role="Salesman" EntitySet="Salesman" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Status1" Association="Self.FK_Product_Status1">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductList_Product" Association="Self.FK_ProductList_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductList" EntitySet="ProductList" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductListOrder_Product" Association="Self.FK_ProductListOrder_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductListOrder" EntitySet="ProductListOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Salesman_User" Association="Self.FK_Salesman_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Salesman" EntitySet="Salesman" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -794,140 +793,144 @@
           <EntitySetMapping Name="Address">
             <EntityTypeMapping TypeName="MarketPlaceModel.Address">
               <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="lat" ColumnName="lat" />
                 <ScalarProperty Name="lot" ColumnName="lot" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Basket">
             <EntityTypeMapping TypeName="MarketPlaceModel.Basket">
               <MappingFragment StoreEntitySet="Basket">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="MarketPlaceModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="MarketPlaceModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="NumberOfCreditCard" ColumnName="NumberOfCreditCard" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="MarketPlaceModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="MarketPlaceModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ID_Basket" ColumnName="ID_Basket" />
                 <ScalarProperty Name="ID_Address" ColumnName="ID_Address" />
+                <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PhotoProduct">
             <EntityTypeMapping TypeName="MarketPlaceModel.PhotoProduct">
               <MappingFragment StoreEntitySet="PhotoProduct">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="MarketPlaceModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
-                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="ID_Salesman" ColumnName="ID_Salesman" />
-                <ScalarProperty Name="Removed" ColumnName="Removed" />
                 <ScalarProperty Name="ID_Status" ColumnName="ID_Status" />
+                <ScalarProperty Name="Removed" ColumnName="Removed" />
+                <ScalarProperty Name="ID_Salesman" ColumnName="ID_Salesman" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductList">
             <EntityTypeMapping TypeName="MarketPlaceModel.ProductList">
               <MappingFragment StoreEntitySet="ProductList">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
-                <ScalarProperty Name="ID_Basket" ColumnName="ID_Basket" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Salesman">
-            <EntityTypeMapping TypeName="MarketPlaceModel.Salesman">
-              <MappingFragment StoreEntitySet="Salesman">
+                <ScalarProperty Name="ID_Basket" ColumnName="ID_Basket" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NameCompany" ColumnName="NameCompany" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DateOnMarketplace" ColumnName="DateOnMarketplace" />
-                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="MarketPlaceModel.Status">
-              <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MarketPlaceModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="MarketPlaceModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Removed" ColumnName="Removed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductListOrder">
             <EntityTypeMapping TypeName="MarketPlaceModel.ProductListOrder">
               <MappingFragment StoreEntitySet="ProductListOrder">
-                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
-                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salesman">
+            <EntityTypeMapping TypeName="MarketPlaceModel.Salesman">
+              <MappingFragment StoreEntitySet="Salesman">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="DateOnMarketplace" ColumnName="DateOnMarketplace" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameCompany" ColumnName="NameCompany" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="MarketPlaceModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MarketPlaceModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="MarketPlaceModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Removed" ColumnName="Removed" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

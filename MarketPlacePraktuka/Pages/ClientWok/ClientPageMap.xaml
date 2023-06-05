@@ -1,0 +1,127 @@
+﻿<Page x:Class="MarketPlacePraktuka.Pages.ClientWok.ClientPageMap"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.ClientWok"
+      mc:Ignorable="d" 
+          DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientPageMap">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="500"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="1000"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="10">
+            <Grid>
+                <TextBox Background="White" Padding="20 0 25 0" x:Name="Search" FontSize="20" TextChanged="TextBox_TextChanged"/>
+                <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" Margin="2"/>
+                
+            </Grid>
+
+            <ListView x:Name="PointAdress"
+                  
+                  ItemsSource="{Binding addresses}"
+                  FontFamily="Trebuchet MS"
+                  FontSize="22"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
+                            <TextBlock  Text="{Binding lat}" FontSize="20" />
+                            <TextBlock  Text="{Binding lot}" FontSize="20" />
+                            <Button Content="Выбрать"
+                                    Command="{Binding DataContext.NavigateToAddressCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="2"  Margin="15" Orientation="Vertical" HorizontalAlignment="Right">
+            <StackPanel Grid.Column="1" Margin="20">
+                <Border Width="257" Height="162" CornerRadius="5">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF2E2E2E" Offset="0"/>
+                            <GradientStop Color="#FF3E3D3D" Offset="1"/>
+                            <GradientStop Color="#FF3E3E3E" Offset="0.43"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <Image Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Source="/Source/logo.png"/>
+                        <Border CornerRadius="5" Height="20" Width="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Background="#FF474747"/>
+                        <Grid Width="200" VerticalAlignment="Center" Height="20">
+
+
+                            <TextBlock Grid.Column="0"   HorizontalAlignment="Center" Foreground="LightGray" x:Name="TextBlock1" />
+
+                        </Grid>
+                        <Grid VerticalAlignment="Bottom" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="20" Grid.Column="0" VerticalAlignment="Bottom">
+                                <TextBlock Text="CARD HOLDER" FontSize="7" Foreground="LightGray"/>
+                                <TextBlock x:Name="NameCard" FontSize="12" Foreground="LightGray"  />
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Column="1">
+                                <TextBlock Text="EXPIRES" FontSize="7" Foreground="LightGray"/>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="DAY/" FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" />
+                                        <TextBlock FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" x:Name="DayCarg"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="MONTH/" FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" />
+                                        <TextBlock FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" x:Name="YearCarg" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <StackPanel >
+                <StackPanel>
+                    <TextBlock Text="Адрес: " FontSize="20" Foreground="White"/>
+                    <TextBlock x:Name="AdressOrder" FontSize="20" Foreground="White"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Фамилия: " FontSize="20" Foreground="White"/>
+                    <TextBlock x:Name="SurnameTxt" FontSize="20" Foreground="White"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Имя: " FontSize="20" Foreground="White"/>
+                    <TextBlock x:Name="NameTxt" FontSize="20" Foreground="White"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Отчество: " FontSize="20" Foreground="White"/>
+                    <TextBlock x:Name="PatTxt" FontSize="20" Foreground="White"/>
+                </StackPanel>
+                <Button Content="Оформить заказ" Click="Button_Click"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <m:Map Mode="AerialWithLabels" Grid.Column="1"  Grid.Row="0" Grid.RowSpan="2"  ZoomLevel="16" x:Name="Map">
+        </m:Map>
+    </Grid>
+</Page>

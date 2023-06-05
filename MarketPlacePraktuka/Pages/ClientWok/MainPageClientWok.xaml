@@ -65,18 +65,14 @@
                         <materialDesign:PackIcon Kind="Basket" />
 
                     </Button>
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Map" Click="Map_Click"  >
-                        <Button.Content>
-                            <materialDesign:PackIcon Kind="Map"/>
-                        </Button.Content>
-                    </Button>
+                    
                     <Button Background="Transparent" Margin="10 10 10 10" x:Name="EmojiManProfile" Click="EmojiManProfile_Click"   >
                         <materialDesign:PackIcon Kind="EmojiManProfile"/>
 
                     </Button>
                     
                 </StackPanel>
-                <Frame x:Name="FrameUser" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden"  />
+                <Frame x:Name="FrameUser" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" NavigationUIVisibility="Hidden"  />
 
 
             </Grid>
