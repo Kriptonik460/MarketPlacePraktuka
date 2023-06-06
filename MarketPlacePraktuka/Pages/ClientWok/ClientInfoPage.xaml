@@ -4,38 +4,83 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MarketPlacePraktuka.Pages.ClientWok"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClientInfoPage">
+      mc:Ignorable="d" d:DesignWidth="800"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+      Title="ClientInfoPage" Height="556">
 
-    <Grid Background="Transparent">
+    <Grid Background="Transparent" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" >
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" DataContext="{Binding client}" >
             <TextBlock Text="Фамилия" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="NameComp"/>
+            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="NameComp" Text="{Binding Surname}" TextChanged="NameComp_TextChanged"/>
             <TextBlock Text="Имя" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="FamComp"/>
+            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="FamComp" Text="{Binding Name}" TextChanged="FamComp_TextChanged"/>
             <TextBlock Text="Отчетво" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="PatronomicComp"/>
-            <TextBlock Text="Номер карты" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="16" Margin="10"  x:Name="Cart"/>
+            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="PatronomicComp" Text="{Binding Patronymic}" TextChanged="PatronomicComp_TextChanged"/>
+
+            <StackPanel   Margin="15" Orientation="Vertical" >
+                <StackPanel Grid.Column="1" Margin="20">
+                    <Border Width="280" Height="180" CornerRadius="5">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF2E2E2E" Offset="0"/>
+                                <GradientStop Color="#FF3E3D3D" Offset="1"/>
+                                <GradientStop Color="#FF3E3E3E" Offset="0.43"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Image Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Source="/Source/logo.png"/>
+                            <Border CornerRadius="5" Height="20" Width="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Background="#FF474747"/>
+                            <Grid Width="200" VerticalAlignment="Center" Height="50" >
 
 
+                                <TextBox Grid.Column="0" Width="190"  HorizontalAlignment="Left" Text="{Binding NumberOfCreditCard}" Foreground="LightGray" FontSize="20" x:Name="TextBox1" MaxLength="16" Margin="0,0,0,19" TextChanged="TextBox1_TextChanged" />
+
+                            </Grid>
+                            <Grid VerticalAlignment="Bottom" Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="20" Grid.Column="0" VerticalAlignment="Bottom">
+                                    <TextBlock Text="CVV" FontSize="12" Foreground="LightGray"/>
+                                    <TextBox FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" Text="{Binding CVV}" x:Name="CVVCarg" MaxLength="3" TextChanged="CVVCarg_TextChanged"/>
+                                </StackPanel>
+                                <StackPanel Margin="5" Grid.Column="1">
+                                    <TextBlock Text="EXPIRES" FontSize="7" Foreground="LightGray"/>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="DAY/" FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" />
+                                            <TextBox FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" x:Name="DayCarg" MaxLength="2" TextChanged="DayCarg_TextChanged" Text="{Binding Month}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="MONTH/" FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" />
+                                            <TextBox FontSize="12" Foreground="LightGray" FontFamily="OCR A Extended" x:Name="YearCarg"  MaxLength="2" TextChanged="YearCarg_TextChanged" Text="{Binding Year}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5" >
+
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5" DataContext="{Binding client}" >
             <TextBlock Text="Ваш логин:" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" x:Name="Log" MaxLength="50" Margin="10" />
+            <TextBox Foreground="White" FontSize="20" x:Name="Log" MaxLength="50" Margin="10" Text="{Binding  User.Login}" />
 
             <TextBlock Text="Ваш пароль"  Foreground="White" FontSize="20" Margin="10"/>
-            <PasswordBox Foreground="White" FontSize="20" x:Name="pass" MaxLength="50" Margin="10"/>
+            <TextBox Foreground="White" FontSize="20" x:Name="pass" MaxLength="50" Margin="10" Text="{Binding User.Password}"/>
 
             <TextBlock Text="Подтвердите пароль для вступление изменений в силу" Foreground="White" FontSize="20" Margin="10" />
-            <PasswordBox Foreground="White" FontSize="20" MaxLength="50" x:Name="PassCorrect" Margin="10" />
-            <Button x:Name="SaveChangeInBase" Content="Сохранить изменения аккаунта" Width="400" Margin="10" Visibility="Collapsed"/>
+            <TextBox Foreground="White" FontSize="20" MaxLength="50" x:Name="PassCorrect" Margin="10" TextChanged="PassCorrect_TextChanged" />
+            <Button x:Name="SaveChangeInBase" Content="Сохранить изменения аккаунта" Width="400" Click="SaveChangeInBase_Click" Margin="10" Visibility="Collapsed" Cursor="Hand"/>
         </StackPanel>
     </Grid>
 </Page>

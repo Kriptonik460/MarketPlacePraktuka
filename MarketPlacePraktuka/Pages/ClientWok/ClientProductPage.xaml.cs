@@ -41,7 +41,7 @@ namespace MarketPlacePraktuka.Pages.ClientWok
         }
       
         private void RefreshProductList() =>
-            ListProduct.ItemsSource = App.DB.Product.ToList() ;
+            ListProduct.ItemsSource = App.DB.Product.Where( p => p.ID_Status == 1).ToList() ;
 
 
         public ICommand _addCommand;
@@ -58,7 +58,15 @@ namespace MarketPlacePraktuka.Pages.ClientWok
                 SaveSomeData.basket = App.DB.Basket.FirstOrDefault(pl => pl.ID_Client == SaveSomeData.client.ID && pl.Status == true);
             }
             else
-            {
+            { 
+                if(product.Count == 0)
+                {
+                    MessageBox.Show("Вы не можете заказать больше, так как данный товар отсутствует у поставщика");
+                }
+                else
+                {
+
+                product.Count--;
                 var productListItem = App.DB.ProductList.FirstOrDefault(pl => pl.ID_Product == product.ID && pl.Basket.Status == true);
                 var basket = (App.DB.Basket.FirstOrDefault(pl => pl.ID_Client == SaveSomeData.client.ID && pl.Status == true));
                 if (productListItem == null)
@@ -74,18 +82,20 @@ namespace MarketPlacePraktuka.Pages.ClientWok
                 App.DB.SaveChanges();
                 RefreshProductList();
                 SaveSomeData.basket = basket;
+                }
             }
 
         }));
         public ICommand _delCommand;
         public ICommand DelCommand => _delCommand ?? (_delCommand = new RelayCommand<Product>((Product product) =>
         {
-
-
+            
+            product.Count++;
             var productListItem = App.DB.ProductList.FirstOrDefault(pl => pl.ID_Product == product.ID && pl.Basket.Status == true);
             if (productListItem.Count > 0)
             {
             productListItem.Count--;
+                
                 if(productListItem.Count == 0)
                 {
                     App.DB.ProductList.Remove(productListItem);

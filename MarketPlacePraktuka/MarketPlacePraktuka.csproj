@@ -46,6 +46,12 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.1.4.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.1.4\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -115,6 +121,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
       <Private>True</Private>
@@ -240,6 +247,9 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -261,6 +271,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -280,14 +291,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ClientWok\MainPageClientWok.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ClientWok\OrderMakeWithProduct.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ClientWok\ProductBeforeOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,12 +401,6 @@
     <Compile Include="Pages\ClientWok\MainPageClientWok.xaml.cs">
       <DependentUpon>MainPageClientWok.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ClientWok\OrderMakeWithProduct.xaml.cs">
-      <DependentUpon>OrderMakeWithProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ClientWok\ProductBeforeOrder.xaml.cs">
-      <DependentUpon>ProductBeforeOrder.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ClientWok\ProductListPage.xaml.cs">
       <DependentUpon>ProductListPage.xaml</DependentUpon>
     </Compile>
@@ -430,6 +427,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Salesmen\DiagrammaSalesmenForProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Salesmen\MainPageSalesman.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -451,6 +452,9 @@
     <Compile Include="Models\SaveSomeData.cs" />
     <Compile Include="Pages\Regustr.xaml.cs">
       <DependentUpon>Regustr.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Salesmen\DiagrammaSalesmenForProduct.xaml.cs">
+      <DependentUpon>DiagrammaSalesmenForProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Salesmen\MainPageSalesman.xaml.cs">
       <DependentUpon>MainPageSalesman.xaml</DependentUpon>

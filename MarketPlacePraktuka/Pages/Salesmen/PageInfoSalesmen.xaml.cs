@@ -32,16 +32,9 @@ namespace MarketPlacePraktuka.Pages.Salesmen
             Discr.Text = salesman.Description.ToString();
             DatePick.Text = salesman.DateOnMarketplace.ToString();
             Log.Text = salesman.User.Login.ToString();
-            pass.Password = salesman.User.Password.ToString();
+            pass.Text = salesman.User.Password.ToString();
+            SaveChangeInBase.Visibility = Visibility.Collapsed;
 
-            if (pass.Password == PassCorrect.Password)
-            {
-                SaveChangeInBase.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                SaveChangeInBase.Visibility = Visibility.Collapsed;
-            }
         }
 
 
@@ -75,9 +68,11 @@ namespace MarketPlacePraktuka.Pages.Salesmen
 
        
 
-        private void PassCorrect_PasswordChanged(object sender, RoutedEventArgs e)
+      
+
+        private void PassCorrect_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (pass.Password == PassCorrect.Password)
+            if (pass.Text == PassCorrect.Text)
             {
                 SaveChangeInBase.Visibility = Visibility.Visible;
             }

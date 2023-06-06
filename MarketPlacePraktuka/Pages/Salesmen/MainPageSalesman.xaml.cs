@@ -27,7 +27,7 @@ namespace MarketPlacePraktuka.Pages.Salesmen
             Instance = this;
             FrameSalesmen.Navigate(new ProductPageSalesmen());
             App.DB.Salesman.Load();
-         
+
         }
         #region Функционал сверху
         private void MinBut2_MouseDown(object sender, MouseButtonEventArgs e)
@@ -42,13 +42,13 @@ namespace MarketPlacePraktuka.Pages.Salesmen
 
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           
-                this.DragMove();
-            
+
+            this.DragMove();
+
         }
         #endregion
 
-        
+
 
 
 
@@ -67,6 +67,11 @@ namespace MarketPlacePraktuka.Pages.Salesmen
         private void User_Click(object sender, RoutedEventArgs e)
         {
             FrameSalesmen.Navigate(new PageInfoSalesmen());
+        }
+
+        private void Diagramma_Click(object sender, RoutedEventArgs e)
+        {
+            FrameSalesmen.Navigate(new DiagrammaSalesmenForProduct());
         }
     }
 }

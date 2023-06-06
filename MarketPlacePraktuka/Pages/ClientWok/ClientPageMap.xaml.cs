@@ -103,11 +103,7 @@ namespace MarketPlacePraktuka.Pages.ClientWok
             PointAdress.ItemsSource = SearchList;
         }
 
-        //<Canvas m:MapLayer.Position="55.80172776728095, 49.17723998396573" x:Name="PointMap"
-        //            m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
-
-        //        <materialDesign:PackIcon Kind = "MapMarker" Width="30" Height="30" Foreground="Red"/>
-        //    </Canvas>
+       
 
         private ICommand _navigateToAddressCommand;
         public ICommand NavigateToAddressCommand => _navigateToAddressCommand ?? (_navigateToAddressCommand = new RelayCommand<Address>(NavigateToPoint));
@@ -148,6 +144,7 @@ namespace MarketPlacePraktuka.Pages.ClientWok
                         Product = item.Product,
                         Count = item.Count
                     });
+                    
                 }
                 SaveSomeData.basket.Status = false;
                 App.DB.SaveChanges();

@@ -58,7 +58,7 @@ namespace MarketPlacePraktuka.Pages.ClientWok
 
         private void EmojiManProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameUser.Navigate(new ClientInfoPage());
         }
 
         private void Product_Click(object sender, RoutedEventArgs e)

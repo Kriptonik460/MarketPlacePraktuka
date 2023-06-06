@@ -33,11 +33,11 @@
             <TextBox Foreground="White" FontSize="20" x:Name="Log" MaxLength="50" Margin="10" />
 
             <TextBlock Text="Ваш пароль"  Foreground="White" FontSize="20" Margin="10"/>
-            <PasswordBox Foreground="White" FontSize="20" x:Name="pass" MaxLength="50" Margin="10"/>
+            <TextBox Foreground="White" FontSize="20" x:Name="pass" MaxLength="50" Margin="10"/>
 
             <TextBlock Text="Подтвердите пароль для вступление изменений в силу" Foreground="White" FontSize="20" Margin="10" />
-            <PasswordBox Foreground="White" FontSize="20" MaxLength="50" x:Name="PassCorrect" Margin="10" />
-            <Button x:Name="SaveChangeInBase"  Content="Сохранить изменения аккаунта" Width="400" Margin="10" Visibility="Collapsed"/>
+            <TextBox Foreground="White" FontSize="20" MaxLength="50" x:Name="PassCorrect" Margin="10" TextChanged="PassCorrect_TextChanged" />
+            <Button x:Name="SaveChangeInBase"  Content="Сохранить изменения аккаунта" Width="400" Margin="10" Visibility="Visible"/>
         </StackPanel>
     </Grid>
 </Page>
