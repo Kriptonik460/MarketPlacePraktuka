@@ -14,7 +14,7 @@
 
         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Foreground="White"  >
             <lvc:CartesianChart.DataTooltip>
-                <lvc:DefaultTooltip Background="Transparent" Foreground="White"/>
+                <lvc:DefaultTooltip Background="Transparent" Foreground="White" BulletSize="20"/>
             </lvc:CartesianChart.DataTooltip>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Salesman" Labels="{Binding Labels}"/>
