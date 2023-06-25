@@ -17,6 +17,7 @@ namespace MarketPlacePraktuka.Models
         public int ID_Product { get; set; }
         public int ID_Order { get; set; }
         public Nullable<int> Count { get; set; }
+        public int ID { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

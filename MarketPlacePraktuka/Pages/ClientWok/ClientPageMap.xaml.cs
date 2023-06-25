@@ -135,19 +135,21 @@ namespace MarketPlacePraktuka.Pages.ClientWok
                 ID_Client = SaveSomeData.client.ID
                 };
                 App.DB.Order.Add(neworder);
-
+               
                 foreach (var  item in App.DB.ProductList.Where(s => s.ID_Basket == SaveSomeData.basket.ID).ToList())
                 {
                     App.DB.ProductListOrder.Add(new ProductListOrder()
                     {
-                        Order = neworder,
-                        Product = item.Product,
+                        ID_Order = neworder.ID,
+                        ID_Product = item.ID_Product,
                         Count = item.Count
                     });
-                    
+                    App.DB.ProductList.Remove(item);
                 }
                 SaveSomeData.basket.Status = false;
                 App.DB.SaveChanges();
+                MessageBox.Show("Заказ оформлен");
+                MainPageClientWok.Instance.FrameUser.Navigate(new ClientProductPage());
             }
         }
     }

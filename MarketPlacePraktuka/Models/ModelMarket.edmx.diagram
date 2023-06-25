@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dc148136d5f24f3fbfb7c715081ca17f" Name="Diagram1">
-        <EntityTypeShape EntityType="MarketPlaceModel.Address" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Basket" Width="1.5" PointX="5.25" PointY="7.625" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="3" PointY="13.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Client" Width="1.5" PointX="3" PointY="4.125" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Employee" Width="1.5" PointX="3" PointY="8.125" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="5.25" PointY="4.625" />
-        <EntityTypeShape EntityType="MarketPlaceModel.PhotoProduct" Width="1.5" PointX="7.5" PointY="11.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="5.25" PointY="10.5" />
-        <EntityTypeShape EntityType="MarketPlaceModel.ProductList" Width="1.5" PointX="7.5" PointY="7.625" />
-        <EntityTypeShape EntityType="MarketPlaceModel.ProductListOrder" Width="1.5" PointX="10.5" PointY="8.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Salesman" Width="1.5" PointX="3" PointY="10.5" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Status" Width="1.5" PointX="3" PointY="16" />
-        <EntityTypeShape EntityType="MarketPlaceModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1.5" />
-        <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="0.75" PointY="7.25" />
+      <Diagram DiagramId="0b95ae9ef5a94e219486a4eca022c275" Name="Diagram1">
+        <EntityTypeShape EntityType="MarketPlaceModel.Address" Width="1.5" PointX="3" PointY="16.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Basket" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="3" PointY="13.125" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Client" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Employee" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="MarketPlaceModel.PhotoProduct" Width="1.5" PointX="7.5" PointY="0.875" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="MarketPlaceModel.ProductList" Width="1.5" PointX="7.5" PointY="4.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.ProductListOrder" Width="1.5" PointX="7.5" PointY="7.875" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Salesman" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Status" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="MarketPlaceModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="0.75" PointY="6.75" />
         <AssociationConnector Association="MarketPlaceModel.FK_Order_Address" />
         <AssociationConnector Association="MarketPlaceModel.FK_Basket_Client" />
         <AssociationConnector Association="MarketPlaceModel.FK_ProductList_Basket" />

@@ -29,11 +29,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6013: Первичный ключ в таблице или представлении "MarketPlace.dbo.Characteristics" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
-        <EntityType Name="Characteristics">
-          <Property Name="ID" Type="int" />
-        </EntityType>-->
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
@@ -46,7 +41,7 @@
           <Property Name="NumberOfCreditCard" Type="nvarchar" MaxLength="16" />
           <Property Name="Month" Type="int" />
           <Property Name="Year" Type="int" />
-          <Property Name="CVV" Type="nvarchar" MaxLength="3" />
+          <Property Name="CVV" Type="int" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -98,12 +93,12 @@
         </EntityType>
         <EntityType Name="ProductListOrder">
           <Key>
-            <PropertyRef Name="ID_Product" />
-            <PropertyRef Name="ID_Order" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID_Product" Type="int" Nullable="false" />
           <Property Name="ID_Order" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Salesman">
           <Key>
@@ -497,7 +492,7 @@
           <Property Name="NumberOfCreditCard" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="Month" Type="Int32" />
           <Property Name="Year" Type="Int32" />
-          <Property Name="CVV" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="CVV" Type="Int32" />
           <NavigationProperty Name="Basket" Relationship="MarketPlaceModel.FK_Basket_Client" FromRole="Client" ToRole="Basket" />
           <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_Client_User" FromRole="Client" ToRole="User" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_Client" FromRole="Client" ToRole="Order" />
@@ -565,12 +560,12 @@
         </EntityType>
         <EntityType Name="ProductListOrder">
           <Key>
-            <PropertyRef Name="ID_Product" />
-            <PropertyRef Name="ID_Order" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID_Product" Type="Int32" Nullable="false" />
           <Property Name="ID_Order" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_ProductListOrder_Order" FromRole="ProductListOrder" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK_ProductListOrder_Product" FromRole="ProductListOrder" ToRole="Product" />
         </EntityType>
@@ -888,6 +883,7 @@
           <EntitySetMapping Name="ProductListOrder">
             <EntityTypeMapping TypeName="MarketPlaceModel.ProductListOrder">
               <MappingFragment StoreEntitySet="ProductListOrder">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
                 <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />

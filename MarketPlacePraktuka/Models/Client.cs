@@ -29,7 +29,7 @@ namespace MarketPlacePraktuka.Models
         public string NumberOfCreditCard { get; set; }
         public Nullable<int> Month { get; set; }
         public Nullable<int> Year { get; set; }
-        public string CVV { get; set; }
+        public Nullable<int> CVV { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Basket> Basket { get; set; }
