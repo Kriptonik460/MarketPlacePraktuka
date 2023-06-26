@@ -38,7 +38,7 @@
             <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
         </EventTrigger>
     </Window.Triggers>-->
-    <Border x:Name="border"   Background="#FF1F1E29">
+    <Border x:Name="border"    Background="white" >
         <!--<Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
         </Border.BorderBrush>-->
@@ -48,7 +48,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border   Background="#FF1F1E29" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+            <Border    Background="white"  MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
 
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
@@ -89,16 +89,16 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF1F1E29"  >
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"  Background="white"   >
                     <Button Background="Transparent"  x:Name="Product" Margin="10 10 10 10"  Click="Product_Click" Cursor="Hand">
                         <Button.Content>
-                            <materialDesign:PackIcon Kind="Basket"  />
+                            <materialDesign:PackIcon Kind="Basket" Foreground="Black" />
                         </Button.Content>
                     </Button>
 
                     <Button Background="Transparent"  x:Name="Setting" Margin="10 10 10 10"  Click="Setting_Click" >
                         <Button.Content>
-                            <materialDesign:PackIcon Kind="Map" />
+                            <materialDesign:PackIcon Kind="Map" Foreground="Black" />
                         </Button.Content>
                     </Button>
                     <Button Background="Transparent"   Margin="10 10 10 10"   x:Name="User" Click="User_Click" >

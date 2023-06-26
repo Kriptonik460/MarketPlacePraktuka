@@ -8,7 +8,7 @@
         AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
         Background="Transparent"
         Title="Regustr" Height="480" Width="488">
-    <Border CornerRadius="25" BorderThickness="5" Background="#FF1F1E29">
+    <Border CornerRadius="25" BorderThickness="5"  Background="white" >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="81*"/>
@@ -65,9 +65,9 @@
                 </Grid>
             </Border>
 
-            <TextBox  x:Name="LoginTb"  Foreground="white"  Grid.Row="2"  Grid.Column="1" Text="{Binding Login}" TextChanged="ValidationLoginPassword"  BorderBrush="Transparent"  FontSize="18" VerticalAlignment="Center" Margin="5,0,5,0" Height="34"   />
+            <TextBox  x:Name="LoginTb"  Foreground="Black"  Grid.Row="2"  Grid.Column="1" Text="{Binding Login}" TextChanged="ValidationLoginPassword"  BorderBrush="Transparent"  FontSize="18" VerticalAlignment="Center" Margin="5,0,5,0" Height="34"   />
 
-            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Логин"  Foreground="White" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0"  Height="26" Width="56"  >
+            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Логин"  Foreground="Black" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0"  Height="26" Width="56"  >
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -81,8 +81,8 @@
                 </TextBlock.Style>
             </TextBlock>
 
-            <TextBox  x:Name="PasswordTb"  Foreground="white" Text="{Binding Password}" Grid.Row="4" Background="Transparent" TextChanged="ValidationLoginPassword" Grid.Column="1"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
-            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Пароль"  Foreground="White" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center" Height="27" Width="68">
+            <TextBox  x:Name="PasswordTb"  Foreground="Black" Text="{Binding Password}" Grid.Row="4" Background="Transparent" TextChanged="ValidationLoginPassword" Grid.Column="1"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
+            <TextBlock IsHitTestVisible="False" FontSize="20" Text="Пароль"  Foreground="Black" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center" Height="27" Width="68">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -96,8 +96,8 @@
                 </TextBlock.Style>
             </TextBlock>
 
-            <TextBox  x:Name="NameTb"  Foreground="white" Text="{Binding Name}" Grid.Row="6" Background="Transparent" Grid.Column="1" TextChanged="ValidationUser"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
-            <TextBlock x:Name="NameField"  IsHitTestVisible="False" FontSize="20" Text="Имя"  Foreground="White" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center" Height="27" >
+            <TextBox  x:Name="NameTb"  Foreground="Black" Text="{Binding Name}" Grid.Row="6" Background="Transparent" Grid.Column="1" TextChanged="ValidationUser"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
+            <TextBlock x:Name="NameField"  IsHitTestVisible="False" FontSize="20" Text="Имя"  Foreground="Black" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center" Height="27" >
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -118,8 +118,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBox  x:Name="FamTb"  Foreground="white"  Background="Transparent" BorderBrush="Transparent" TextChanged="ValidationUser" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
-                <TextBlock IsHitTestVisible="False" FontSize="20" Text="Фамилия"  Foreground="White" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center" Height="27" >
+                <TextBox  x:Name="FamTb"  Foreground="Black"  Background="Transparent" BorderBrush="Transparent" TextChanged="ValidationUser" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
+                <TextBlock IsHitTestVisible="False" FontSize="20" Text="Фамилия"  Foreground="Black" HorizontalAlignment="Left" Margin="30 0 0 0"  VerticalAlignment="Center" Height="27" >
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -133,8 +133,8 @@
                     </TextBlock.Style>
                 </TextBlock>
 
-                <TextBox  x:Name="PatrTb"  Foreground="white" Grid.Row="10" Text="{Binding Patronymic}" Background="Transparent" Grid.Column="1" TextChanged="ValidationUser"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
-                <TextBlock IsHitTestVisible="False" FontSize="20" Text="Отчество" Width="auto"   Foreground="White" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" Margin="30 0 0 0" VerticalAlignment="Center" Height="27" >
+                <TextBox  x:Name="PatrTb"  Foreground="Black" Grid.Row="10" Text="{Binding Patronymic}" Background="Transparent" Grid.Column="1" TextChanged="ValidationUser"  BorderBrush="Transparent" VerticalAlignment="Center" FontSize="18" Margin="5,0,5,0" Height="35"   />
+                <TextBlock IsHitTestVisible="False" FontSize="20" Text="Отчество" Width="auto"   Foreground="Black" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" Margin="30 0 0 0" VerticalAlignment="Center" Height="27" >
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>

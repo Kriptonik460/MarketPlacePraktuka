@@ -25,9 +25,9 @@
         <ListView x:Name="UserList"
                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    Background="Transparent"
+                    Background="White"
                  d:ItemsSource="{d:SampleData ItemCount=5}"
-                  
+                  Foreground="Black"
                   FontFamily="Trebuchet MS"
                   FontSize="22"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"  >
@@ -41,22 +41,22 @@
                 <DataTemplate>
 
                     <DockPanel Margin="25 5 25 10"   >
-                        <TextBlock  Text="{Binding ID, StringFormat='{}ID Гандона: {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding ID, StringFormat='{}ID Пользователя: {0}'}"  FontSize="20" TextWrapping="Wrap"
                                         DockPanel.Dock="Top"/>
-                        <TextBlock  Text="{Binding NameCompany, StringFormat='{}Наименование компании гандона : {0}'}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top"/>
-                        <TextBlock  Text="{Binding Description, StringFormat='{}Описание гандона : {0}'}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top"/>
+                        <TextBlock  Text="{Binding NameCompany, StringFormat='{}Наименование компании Пользователя : {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" />
+                        <TextBlock  Text="{Binding Description, StringFormat='{}Описание Пользователя : {0}'}" FontSize="20" TextWrapping="Wrap"
+                                        DockPanel.Dock="Top" />
                         <TextBlock  Text="{Binding DateOnMarketplace, StringFormat='{}На рынке с: {0}'}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top" Cursor=""/>
+                                        DockPanel.Dock="Top" Cursor="" />
                         <TextBlock  Text="{Binding User.ID, StringFormat='{}ID: {0}'}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top" Cursor=""/>
+                                        DockPanel.Dock="Top" Cursor="" Foreground="Black"/>
                         <TextBlock  Text="{Binding User.Login, StringFormat='{}Логин: {0}'}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top" Cursor=""/>
+                                        DockPanel.Dock="Top" Cursor="" Foreground="Black"/>
                         <TextBlock  Text="{Binding User.Password, StringFormat='{}Пароль: {0}'}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top" Cursor=""/>
+                                        DockPanel.Dock="Top" Cursor="" Foreground="Black"/>
                         <TextBlock  Text="{Binding User.Removed, StringFormat='{}Статус: {0}', Converter={StaticResource BoolPresenter}}" FontSize="20" TextWrapping="Wrap"
-                                        DockPanel.Dock="Top" Cursor="" x:Name="Stat">
+                                        DockPanel.Dock="Top" Cursor="" x:Name="Stat" Foreground="Black">
 
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">

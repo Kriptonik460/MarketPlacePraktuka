@@ -8,16 +8,16 @@
         WindowState="Maximized"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="MainWindowEmp" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None"  Background="Transparent" BorderBrush="Transparent">
-    <Grid Background="#FF1F1E29">
+    <Grid  Background="white" >
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border   Background="#FF1F1E29" MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
+            <Border    Background="white"  MouseDown="ToolBar_MouseDown"  Grid.Row="0"  >
 
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 5 5 5" >
                     <Image Name="MinBut"  Height="13" Width="25" MouseDown="MinBut_MouseDown" >
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
@@ -55,7 +55,7 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF1F1E29" Width="100"  >
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"  Background="white"  Width="100"  >
                     <Button Background="Transparent"  x:Name="Product" Margin="10 10 10 10" Click="Product_Click"   >
                      
                             <materialDesign:PackIcon Kind="Create" />

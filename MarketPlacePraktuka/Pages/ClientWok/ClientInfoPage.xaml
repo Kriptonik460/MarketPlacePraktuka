@@ -14,12 +14,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" DataContext="{Binding client}" >
-            <TextBlock Text="Фамилия" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="NameComp" Text="{Binding Surname}" TextChanged="NameComp_TextChanged"/>
-            <TextBlock Text="Имя" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="FamComp" Text="{Binding Name}" TextChanged="FamComp_TextChanged"/>
-            <TextBlock Text="Отчетво" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" MaxLength="150" Margin="10"  x:Name="PatronomicComp" Text="{Binding Patronymic}" TextChanged="PatronomicComp_TextChanged"/>
+            <TextBlock Text="Фамилия" Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBox Foreground="Black" FontSize="20" MaxLength="150" Margin="10"  x:Name="NameComp" Text="{Binding Surname}" TextChanged="NameComp_TextChanged"/>
+            <TextBlock Text="Имя" Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBox Foreground="Black" FontSize="20" MaxLength="150" Margin="10"  x:Name="FamComp" Text="{Binding Name}" TextChanged="FamComp_TextChanged"/>
+            <TextBlock Text="Отчетво" Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBox Foreground="Black" FontSize="20" MaxLength="150" Margin="10"  x:Name="PatronomicComp" Text="{Binding Patronymic}" TextChanged="PatronomicComp_TextChanged"/>
 
             <StackPanel   Margin="15" Orientation="Vertical" >
                 <StackPanel Grid.Column="1" Margin="20">
@@ -72,14 +72,14 @@
 
 
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5" DataContext="{Binding client}" >
-            <TextBlock Text="Ваш логин:" Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" x:Name="Log" MaxLength="50" Margin="10" Text="{Binding  User.Login}" />
+            <TextBlock Text="Ваш логин:" Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBox Foreground="Black" FontSize="20" x:Name="Log" MaxLength="50" Margin="10" Text="{Binding  User.Login}" />
 
-            <TextBlock Text="Ваш пароль"  Foreground="White" FontSize="20" Margin="10"/>
-            <TextBox Foreground="White" FontSize="20" x:Name="pass" MaxLength="50" Margin="10" Text="{Binding User.Password}"/>
+            <TextBlock Text="Ваш пароль"  Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBox Foreground="Black" FontSize="20" x:Name="pass" MaxLength="50" Margin="10" Text="{Binding User.Password}"/>
 
-            <TextBlock Text="Подтвердите пароль для вступление изменений в силу" Foreground="White" FontSize="20" Margin="10" />
-            <TextBox Foreground="White" FontSize="20" MaxLength="50" x:Name="PassCorrect" Margin="10" TextChanged="PassCorrect_TextChanged" />
+            <TextBlock Text="Подтвердите пароль для вступление изменений в силу" Foreground="Black" FontSize="20" Margin="10" />
+            <TextBox Foreground="Black" FontSize="20" MaxLength="50" x:Name="PassCorrect" Margin="10" TextChanged="PassCorrect_TextChanged" />
             <Button x:Name="SaveChangeInBase" Content="Сохранить изменения аккаунта" Width="400" Click="SaveChangeInBase_Click" Margin="10" Visibility="Collapsed" Cursor="Hand"/>
         </StackPanel>
     </Grid>

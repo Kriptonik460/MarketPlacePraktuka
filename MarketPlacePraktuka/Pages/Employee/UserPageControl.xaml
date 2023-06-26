@@ -40,21 +40,21 @@
                 <DataTemplate>
 
                     <DockPanel Margin="25 5 25 10" >
-                        <TextBlock  Text="{Binding ID, StringFormat='{}ID Гандона: {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding ID, StringFormat='{}ID Пользователя: {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top"/>
-                        <TextBlock  Text="{Binding Surname, StringFormat='{}Фамилия гандона : {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding Surname, StringFormat='{}Фамилия Пользователя : {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top"/>
-                        <TextBlock  Text="{Binding Name, StringFormat='{}Имя гандона : {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding Name, StringFormat='{}Имя Пользователя : {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top"/>
-                        <TextBlock  Text="{Binding Patronymic, StringFormat='{}Отчество: {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding Patronymic, StringFormat='{}Отчество Пользователя: {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top" Cursor=""/>
-                        <TextBlock  Text="{Binding User.ID, StringFormat='{}ID: {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding User.ID, StringFormat='{}ID: {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top" Cursor=""/>
-                        <TextBlock  Text="{Binding User.Login, StringFormat='{}Логин: {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding User.Login, StringFormat='{}Логин: {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top" Cursor=""/>
-                        <TextBlock  Text="{Binding User.Password, StringFormat='{}Пароль: {0}'}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding User.Password, StringFormat='{}Пароль: {0}'}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top" Cursor=""/>
-                        <TextBlock  Text="{Binding User.Removed, StringFormat='{}Статус: {0}', Converter={StaticResource BoolPresenter}}" FontSize="20" TextWrapping="Wrap"
+                        <TextBlock  Text="{Binding User.Removed, StringFormat='{}Статус: {0}', Converter={StaticResource BoolPresenter}}" Foreground="Black" FontSize="20" TextWrapping="Wrap"
                                         DockPanel.Dock="Top" Cursor="" x:Name="Stat">
                             
                         </TextBlock>

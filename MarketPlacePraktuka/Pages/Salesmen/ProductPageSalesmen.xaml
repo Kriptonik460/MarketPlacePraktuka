@@ -35,7 +35,7 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
 
-                <Expander Grid.Row="0" FontSize="15" Foreground="White" x:Name="expanderSymbol" HorizontalAlignment="Left" Background="Transparent" >
+                <Expander Grid.Row="0" FontSize="15" Foreground="Black" x:Name="expanderSymbol" HorizontalAlignment="Left" Background="Transparent" >
                     <Expander.Header>
                        Категория
                     </Expander.Header>
@@ -48,7 +48,7 @@
                     </ItemsControl>
                 </Expander>
 
-                <Expander Grid.Row="0" FontSize="15" Foreground="White"  HorizontalAlignment="Right" Background="Transparent" >
+                <Expander Grid.Row="0" FontSize="15" Foreground="Black"  HorizontalAlignment="Right" Background="Transparent" >
                     <Expander.Header>
                         Статус
                     </Expander.Header>
@@ -182,12 +182,12 @@
 
                         <TextBox  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap" Foreground="White"/>
 
-                        <TextBlock Text="Описание" FontSize="20" Foreground="White" />
+                        <TextBlock Text="Описание" FontSize="20" Foreground="Black" />
                         <TextBox  Text="{Binding Description}" FontSize="20" TextWrapping="NoWrap" Foreground="White"/>
                         <TextBlock Text="Характеристика" FontSize="20" Foreground="White"/>
                         <TextBox  Text="{Binding Characteristics}" FontSize="20" TextWrapping="NoWrap" Foreground="White"/>
                         <TextBlock Text="Категория" FontSize="20" Foreground="White"/>
-                        <ComboBox SelectedItem="{Binding Category }" x:Name="Categor" FontSize="20"  DisplayMemberPath="Name" Height="40" Foreground="White" />
+                        <ComboBox SelectedItem="{Binding Category }" x:Name="Categor" FontSize="20"  DisplayMemberPath="Name" Height="40" Foreground="Black" />
                         <TextBlock Text="Количество" FontSize="20" Foreground="White"/>
                         <TextBox  Text="{Binding Count}" FontSize="20" Foreground="White"/>
                         <TextBlock Text="Цена" FontSize="20" Foreground="White"/>

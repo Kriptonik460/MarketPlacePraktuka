@@ -23,7 +23,7 @@
                   Grid.Column="0" Grid.Row="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Background="Transparent"
-                  
+                   Foreground="Black"
                   d:ItemsSource="{d:SampleData ItemCount=5}"
                   FontFamily="Trebuchet MS"
                   FontSize="22"
@@ -35,7 +35,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="25" Margin="5 5 5 5" Height="auto"  Background="#FF1F1E29" BorderBrush="Transparent" BorderThickness="2">
+                    <Border CornerRadius="25" Margin="5 5 5 5" Height="auto"   Background="white"  BorderBrush="Transparent" BorderThickness="2">
                         <DockPanel Margin="25 5 25 10" >
                             <TextBlock  Text="{Binding Name, StringFormat='{}Наименование: {0}'}" FontSize="20" TextWrapping="Wrap"
                                         DockPanel.Dock="Top"/>

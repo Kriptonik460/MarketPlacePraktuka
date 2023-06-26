@@ -40,7 +40,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="25" Margin="5 5 5 5" Height="auto" Width="550"  Background="#FF1F1E29" BorderBrush="Transparent" BorderThickness="2" >
+                    <Border CornerRadius="25" Margin="5 5 5 5" Height="auto" Width="550"   Background="white"  BorderBrush="Transparent" BorderThickness="2" >
                         <DockPanel Margin="25 5 25 10"  >
                             <TextBlock  Text="{Binding Name, StringFormat='{}Наименование: {0}'}" FontSize="16" TextWrapping="Wrap"
                                         DockPanel.Dock="Top"/>
@@ -62,7 +62,7 @@
                                 </ListView.ItemsPanel>
                                 <ListView.ItemTemplate>
                                     <DataTemplate >
-                                        <Border CornerRadius="25"  Height="100"  Background="#FF1F1E29" BorderBrush="Transparent" BorderThickness="2">
+                                        <Border CornerRadius="25"  Height="100"   Background="white"  BorderBrush="Transparent" BorderThickness="2">
 
 
                                             <Image Source="{Binding Photo}" Height="100" Width="100"/>

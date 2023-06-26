@@ -23,7 +23,7 @@
 
         <StackPanel Grid.Row="1" Margin="10">
             <Grid>
-                <TextBox Background="White" Padding="20 0 25 0" x:Name="Search" FontSize="20" TextChanged="TextBox_TextChanged"/>
+                <TextBox Background="White" Padding="20 0 25 0" Foreground="Black" x:Name="Search" FontSize="20" TextChanged="TextBox_TextChanged"/>
                 <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" Margin="2"/>
                 <StackPanel Orientation="Vertical">
                     
@@ -35,7 +35,7 @@
             </Grid>
            
                 <ListView x:Name="PointAdress"
-                  
+                  Foreground="Black"
                   ItemsSource="{Binding addresses}"
                   FontFamily="Trebuchet MS"
                   FontSize="22"
@@ -64,12 +64,12 @@
    
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Visibility="Collapsed" x:Name="PanelAdress" DataContext="{Binding Address}">
-            <TextBlock Text="Название точки" Foreground="White" FontSize="20"/>
-            <TextBox  FontSize="18" x:Name="NameAdress" BorderBrush="White" BorderThickness="2" Text="{Binding Name}" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
-            <TextBlock Text="Координаты точки lat" Foreground="White" FontSize="20"/>
-            <TextBox FontSize="18" BorderBrush="White" x:Name="LatPoint" BorderThickness="2" Text="{Binding lat}" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
-            <TextBlock Text="Координаты точки lot" Foreground="White" FontSize="20"/>
-            <TextBox FontSize="18" BorderBrush="White" BorderThickness="2" Text="{Binding lot}" x:Name="LotPoint" Width="200" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
+            <TextBlock Text="Название точки" Foreground="Black" FontSize="20"/>
+            <TextBox  FontSize="18" x:Name="NameAdress" Foreground="Black" BorderBrush="White" BorderThickness="2" Text="{Binding Name}" Width="100" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
+            <TextBlock Text="Координаты точки lat" Foreground="Black" FontSize="20"/>
+            <TextBox FontSize="18" BorderBrush="White" Foreground="Black" x:Name="LatPoint" BorderThickness="2" Text="{Binding lat}" Width="100" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
+            <TextBlock Text="Координаты точки lot" Foreground="Black" FontSize="20"/>
+            <TextBox FontSize="18" BorderBrush="White" Foreground="Black" BorderThickness="2" Text="{Binding lot}" x:Name="LotPoint" Width="100" Margin="5 0 5 5" HorizontalAlignment="Center" MaxLength="250"/>
             <Button HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" x:Name="SaveAdress" Click="SaveAdress_Click">
                 <materialDesign:PackIcon Kind="Loading"/>
             </Button>

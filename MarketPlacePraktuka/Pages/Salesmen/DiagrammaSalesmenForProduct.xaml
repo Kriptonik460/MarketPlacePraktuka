@@ -12,9 +12,9 @@
 
     <Grid>
 
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Foreground="White"  >
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Foreground="Black"  >
             <lvc:CartesianChart.DataTooltip>
-                <lvc:DefaultTooltip Background="Transparent" Foreground="White" BulletSize="20"/>
+                <lvc:DefaultTooltip Background="Transparent" Foreground="Black" BulletSize="20"/>
             </lvc:CartesianChart.DataTooltip>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Salesman" Labels="{Binding Labels}"/>

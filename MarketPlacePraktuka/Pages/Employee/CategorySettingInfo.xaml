@@ -26,7 +26,7 @@
                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Background="Transparent"
-                  
+                   Foreground="Black"
                   d:ItemsSource="{d:SampleData ItemCount=5}"
                   FontFamily="Trebuchet MS"
                   FontSize="22"
@@ -67,8 +67,8 @@
         <StackPanel  Orientation="Horizontal" Grid.Row="2" Grid.Column="0" >
             <StackPanel Orientation="Horizontal"  Margin="5" x:Name="StackAdd" Visibility="Collapsed" >
 
-                <TextBlock Text="Наименование" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Foreground="White" x:Name="NameText" FontSize="20" Width="1000" VerticalAlignment="Center"  Margin="5" MaxLength="150"/>
+                <TextBlock Text="Наименование" Foreground="Black" FontSize="20" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Foreground="Black" x:Name="NameText" FontSize="20" Width="1000" VerticalAlignment="Center"  Margin="5" MaxLength="150"/>
                 <Button Grid.Row="3" Content="Сохранить категорию" x:Name="SaveCat" Click="SaveCat_Click"  Grid.Column="1" Margin="5"/>
                 <Button Grid.Row="3" Content="Отменить изменения" x:Name="Cancel" Click="Cancel_Click"  Grid.Column="1" Margin="5"/>
             </StackPanel>
