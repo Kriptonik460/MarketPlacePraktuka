@@ -56,26 +56,26 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"  Background="white"  Width="100"  >
-                    <Button Background="Transparent"  x:Name="Product" Margin="10 10 10 10" Click="Product_Click"   >
+                    <Button Background="Transparent" Foreground="Black" x:Name="Product" Margin="10 10 10 10" Click="Product_Click"   >
                      
                             <materialDesign:PackIcon Kind="Create" />
                         
                     </Button>
-                    <Button Background="Transparent"  x:Name="Categor" Margin="10 10 10 10" Click="Categor_Click"   >
+                    <Button Background="Transparent" Foreground="Black"  x:Name="Categor" Margin="10 10 10 10" Click="Categor_Click"   >
 
                         <materialDesign:PackIcon Kind="Category" />
 
                     </Button>
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Setting" Click="Setting_Click"  >
+                    <Button Background="Transparent" Margin="10 10 10 10" Foreground="Black" x:Name="Setting" Click="Setting_Click"  >
                         <Button.Content>
                             <materialDesign:PackIcon Kind="Map"/>
                         </Button.Content>
                     </Button>
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="User" Click="User_Click"   >
+                    <Button Background="Transparent" Margin="10 10 10 10" Foreground="Black" x:Name="User" Click="User_Click"   >
                         <materialDesign:PackIcon Kind="Men"/>
                        
                     </Button>
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="Sales" Click="Sales_Click"   >
+                    <Button Background="Transparent" Margin="10 10 10 10" Foreground="Black" x:Name="Sales" Click="Sales_Click"   >
                         <materialDesign:PackIcon Kind="BoxAddOutline"/>
 
                     </Button>

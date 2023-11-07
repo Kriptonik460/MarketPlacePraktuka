@@ -15,10 +15,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" >
-            <TextBlock Text="Наименование компании" Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBlock Text="Ваше наименование" Foreground="Black" FontSize="20" Margin="10"/>
             <TextBox Foreground="Black" FontSize="20" MaxLength="150" Margin="10"  x:Name="NameComp"/>
 
-            <TextBlock Text="Описание"  Foreground="Black" FontSize="20" Margin="10"/>
+            <TextBlock Text="Описание вашего профиля"  Foreground="Black" FontSize="20" Margin="10"/>
             <ScrollViewer>
 
                 <TextBox TextWrapping="Wrap"  x:Name="Discr" Foreground="Black" FontSize="20" MaxHeight="500" Margin="10" />

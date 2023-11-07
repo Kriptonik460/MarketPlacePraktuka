@@ -385,9 +385,6 @@
     <Compile Include="Models\Status.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelMarket.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>ModelMarket.tt</DependentUpon>
     </Compile>
@@ -446,6 +443,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Salesmen\SettingPageSaleaman.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

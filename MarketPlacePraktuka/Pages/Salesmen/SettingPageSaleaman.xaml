@@ -35,7 +35,7 @@
             </Grid>
            
                 <ListView x:Name="PointAdress"
-                  Foreground="Black"
+                  Foreground="White"
                   ItemsSource="{Binding addresses}"
                   FontFamily="Trebuchet MS"
                   FontSize="22"
@@ -48,10 +48,10 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"/>
-                            <TextBlock  Text="{Binding lat}" FontSize="20" />
-                            <TextBlock  Text="{Binding lot}" FontSize="20" />
-                            <Button Content="Показать"
+                            <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap" Foreground="Black"/>
+                            <TextBlock  Text="{Binding lat}" FontSize="20"  Foreground="Black"/>
+                            <TextBlock  Text="{Binding lot}" FontSize="20"  Foreground="Black"/>
+                            <Button Content="Показать" Foreground="Black"
                                     Command="{Binding DataContext.NavigateToAddressCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                     CommandParameter="{Binding}"/>
                         </StackPanel>

@@ -60,12 +60,12 @@
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">
 
-                            <Button Content="Забанить" Margin="5"
+                            <Button Content="Заблокировать" Margin="5"
                                     FontSize="18"
                                     x:Name="DelBtn"
                                     Command="{Binding DataContext.DelCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                     CommandParameter="{Binding}"/>
-                            <Button Content="Спасти" Margin="5"
+                            <Button Content="Разблокировать" Margin="5"
                                     FontSize="18"
                                     x:Name="SavelBtn"
                                     Command="{Binding DataContext.SaveCommand, RelativeSource={RelativeSource AncestorType=Page}}"

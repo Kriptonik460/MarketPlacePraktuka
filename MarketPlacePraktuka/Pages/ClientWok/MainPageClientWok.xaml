@@ -55,18 +55,18 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"  Background="white"  Width="100"  >
-                    <Button Background="Transparent"  x:Name="Product" Margin="10 10 10 10" Click="Product_Click"   >
+                    <Button Background="Transparent" Foreground="Black"  x:Name="Product" Margin="10 10 10 10" Click="Product_Click"   >
 
                         <materialDesign:PackIcon Kind="OrderAlphabeticalAscending" />
 
                     </Button>
-                    <Button Background="Transparent"  x:Name="Basket" Margin="10 10 10 10" Click="Basket_Click"   >
+                    <Button Background="Transparent" Foreground="Black"  x:Name="Basket" Margin="10 10 10 10" Click="Basket_Click"   >
 
                         <materialDesign:PackIcon Kind="Basket" />
 
                     </Button>
-                    
-                    <Button Background="Transparent" Margin="10 10 10 10" x:Name="EmojiManProfile" Click="EmojiManProfile_Click"   >
+
+                    <Button Background="Transparent" Margin="10 10 10 10"  Foreground="Black" x:Name="EmojiManProfile" Click="EmojiManProfile_Click"   >
                         <materialDesign:PackIcon Kind="EmojiManProfile"/>
 
                     </Button>

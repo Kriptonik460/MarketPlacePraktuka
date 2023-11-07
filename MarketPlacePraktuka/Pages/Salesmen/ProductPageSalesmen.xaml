@@ -33,16 +33,15 @@
 
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
-
-                <Expander Grid.Row="0" FontSize="15" Foreground="Black" x:Name="expanderSymbol" HorizontalAlignment="Left" Background="Transparent" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" >
+                <Expander Grid.Row="0" FontSize="15" Foreground="Black"  x:Name="expanderSymbol" HorizontalAlignment="Left" Background="Transparent" >
                     <Expander.Header>
                        Категория
                     </Expander.Header>
-                    <ItemsControl ItemsSource="{Binding Path=[0]}" >
+                    <ItemsControl ItemsSource="{Binding Path=[0]}" Foreground="Black" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" MaxWidth="1200" />
+                                <WrapPanel Orientation="Horizontal" MaxWidth="1200"  />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -52,10 +51,10 @@
                     <Expander.Header>
                         Статус
                     </Expander.Header>
-                    <ItemsControl ItemsSource="{Binding Path=[1]}">
+                    <ItemsControl ItemsSource="{Binding Path=[1]}" Foreground="Black">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
+                                <StackPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -110,10 +109,10 @@
                 <DataTemplate>
                     <Border CornerRadius="25" Margin="5 5 5 5" Height="350" Width="320" Background="Transparent" BorderBrush="Transparent" BorderThickness="2">
                         <DockPanel Margin="25 5 25 10" >
-                            <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap"
+                            <TextBlock  Text="{Binding Name}" FontSize="20" TextWrapping="Wrap" Foreground="Black"
                                         DockPanel.Dock="Top"/>
-                            <TextBlock  Text="{Binding Count}" FontSize="20" DockPanel.Dock="Top"/>
-                            <TextBlock  Text="{Binding Cost}" FontSize="20" DockPanel.Dock="Top"/>
+                            <TextBlock  Text="{Binding Count}" FontSize="20" DockPanel.Dock="Top" Foreground="Black"/>
+                            <TextBlock  Text="{Binding Cost}" FontSize="20" DockPanel.Dock="Top" Foreground="Black"/>
 
                             <Button Content="Подробнее"
                                     DockPanel.Dock="Bottom"

@@ -25,7 +25,7 @@
                   Grid.Column="0" Grid.Row="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Background="Transparent"
-                  
+                  Foreground="Black"
                   d:ItemsSource="{d:SampleData ItemCount=5}"
                   FontFamily="Trebuchet MS"
                   FontSize="22"

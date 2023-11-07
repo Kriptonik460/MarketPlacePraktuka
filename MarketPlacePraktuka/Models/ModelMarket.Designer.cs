@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\makki\Source\Repos\MarketPlacePraktukaPP\MarketPlacePraktuka\Models\ModelMarket.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\KRUPTONIK\Source\Repos\MarketPlacePraktukaqwerty\MarketPlacePraktuka\Models\ModelMarket.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

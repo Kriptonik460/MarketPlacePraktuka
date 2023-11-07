@@ -73,7 +73,7 @@ namespace MarketPlacePraktuka.Pages
                 {
                         if(cd.Removed == true)
                         {
-                            MessageBox.Show("пошел нахуй ты в бане");
+                            MessageBox.Show("Ваш профиль заблокирован администратором");
                             LoginTb.Text = string.Empty;
                             PasswordTb.Text = string.Empty;
                         }

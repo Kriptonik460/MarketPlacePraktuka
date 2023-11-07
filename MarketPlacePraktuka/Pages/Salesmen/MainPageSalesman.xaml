@@ -38,7 +38,7 @@
             <BeginStoryboard Storyboard="{StaticResource RainbowStoryboard}" />
         </EventTrigger>
     </Window.Triggers>-->
-    <Border x:Name="border"    Background="white" >
+    <Border x:Name="border"    Background="Transparent" >
         <!--<Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource RainbowGradientStops}"/>
         </Border.BorderBrush>-->
@@ -103,16 +103,16 @@
                     </Button>
                     <Button Background="Transparent"   Margin="10 10 10 10"   x:Name="User" Click="User_Click" >
                         <Button.Content>
-                            <materialDesign:PackIcon Kind="user" />
+                            <materialDesign:PackIcon Kind="user" Foreground="Black"/>
                         </Button.Content>
                     </Button>
                     <Button Background="Transparent"   Margin="10 10 10 10"   x:Name="Diagramma" Click="Diagramma_Click" >
                         <Button.Content>
-                            <materialDesign:PackIcon Kind="Dial" />
+                            <materialDesign:PackIcon Kind="Dial" Foreground="Black" />
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <Frame x:Name="FrameSalesmen" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Cursor=""  />
+                <Frame x:Name="FrameSalesmen" Background="Gray" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Cursor=""  />
                 
 
             </Grid>

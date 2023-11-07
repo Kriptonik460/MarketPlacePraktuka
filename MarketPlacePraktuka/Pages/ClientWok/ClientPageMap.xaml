@@ -11,7 +11,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClientPageMap">
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="500"/>
             <RowDefinition Height="500"/>
@@ -24,13 +24,13 @@
 
         <StackPanel Grid.Row="0" Margin="10">
             <Grid>
-                <TextBox Background="White" Padding="20 0 25 0" x:Name="Search" FontSize="20" TextChanged="TextBox_TextChanged"/>
+                <TextBox Background="Black" Padding="20 0 25 0" x:Name="Search" FontSize="20" TextChanged="TextBox_TextChanged"/>
                 <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" Margin="2"/>
                 
             </Grid>
 
             <ListView x:Name="PointAdress"
-                  
+                  Foreground="Black"
                   ItemsSource="{Binding addresses}"
                   FontFamily="Trebuchet MS"
                   FontSize="22"
@@ -102,20 +102,20 @@
             </StackPanel>
             <StackPanel >
                 <StackPanel>
-                    <TextBlock Text="Адрес: " FontSize="20" Foreground="White"/>
-                    <TextBlock x:Name="AdressOrder" FontSize="20" Foreground="White"/>
+                    <TextBlock Text="Адрес: " FontSize="20" Foreground="Black"/>
+                    <TextBlock x:Name="AdressOrder" FontSize="20" Foreground="Black"/>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Фамилия: " FontSize="20" Foreground="White"/>
-                    <TextBlock x:Name="SurnameTxt" FontSize="20" Foreground="White"/>
+                    <TextBlock Text="Фамилия: " FontSize="20" Foreground="Black"/>
+                    <TextBlock x:Name="SurnameTxt" FontSize="20" Foreground="Black"/>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Имя: " FontSize="20" Foreground="White"/>
-                    <TextBlock x:Name="NameTxt" FontSize="20" Foreground="White"/>
+                    <TextBlock Text="Имя: " FontSize="20" Foreground="Black"/>
+                    <TextBlock x:Name="NameTxt" FontSize="20" Foreground="Black"/>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Отчество: " FontSize="20" Foreground="White"/>
-                    <TextBlock x:Name="PatTxt" FontSize="20" Foreground="White"/>
+                    <TextBlock Text="Отчество: " FontSize="20" Foreground="Black"/>
+                    <TextBlock x:Name="PatTxt" FontSize="20" Foreground="Black"/>
                 </StackPanel>
                 <Button Content="Оформить заказ" Click="Button_Click"/>
             </StackPanel>

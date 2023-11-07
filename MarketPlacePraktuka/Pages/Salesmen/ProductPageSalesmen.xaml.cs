@@ -136,38 +136,7 @@ namespace MarketPlacePraktuka.Pages.Salesmen
 
 
             Categor.ItemsSource = App.DB.Category.Local.ToList();
-            /*
-                        foreach (var categoria in App.DB.Category)
-                        {
-                            var checkBox = new CheckBox
-                            {
-                                Foreground = new SolidColorBrush(Colors.White),
-                                FontSize = 20,
-                                Content = categoria.Name,
-                                DataContext = categoria,
-                                IsChecked = true
-                            };
-                            checkBox.Checked += CheckBox_Checked;
-                            checkBox.Unchecked += CheckBox_Unchecked;
-                            Categ.Children.Add(checkBox);
-                            checkBoxes.Add(checkBox);
-                        }
-                        foreach (var status in App.DB.Status)
-                        {
-                            var checkBox2 = new CheckBox
-                            {
-                                Foreground = new SolidColorBrush(Colors.White),
-                                FontSize = 20,
-                                Content = status.Name,
-                                DataContext = status,
-                                IsChecked = true
-                            };
-                            checkBox2.Checked += CheckBox_Checked2;
-                            checkBox2.Unchecked += CheckBox_Unchecked2;
-                            Status.Children.Add(checkBox2);
-                            checkBoxes.Add(checkBox2);
-                        }
-            */
+           
         }
 
         private void RefreshItemsSource(Button addButton)
@@ -176,46 +145,7 @@ namespace MarketPlacePraktuka.Pages.Salesmen
                                                                 .Cast<object>()
                                                                 .Append(addButton);
         }
-        /* #region Категория
-         private void CheckBox_Checked(object sender, RoutedEventArgs e)
-         {
-             var itemCategoria = (sender as CheckBox).DataContext as Category;
-             Products.AddRange(App.DB.Product.Where(p => p.Category.ID == itemCategoria.ID));
-             ListProduct.ItemsSource = Products;
-             ListProduct.Items.Refresh();
-         }
-
-         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-         {
-             var itemCategoria = (sender as CheckBox).DataContext as Category;
-             foreach(var item in App.DB.Product.Where(p => p.Category.ID == itemCategoria.ID))
-             {
-                 Products?.Remove(item);
-             }
-             ListProduct.ItemsSource = Products;
-             ListProduct.Items.Refresh();
-         }
-         #endregion
-         #region Status
-         private void CheckBox_Checked2(object sender, RoutedEventArgs e)
-         {
-             var itemStatus = (sender as CheckBox).DataContext as Status;
-             Products.AddRange(App.DB.Product.Where(p => p.Status.ID == itemStatus.ID));
-             ListProduct.ItemsSource = Products;
-             ListProduct.Items.Refresh();
-         }
-
-         private void CheckBox_Unchecked2(object sender, RoutedEventArgs e)
-         {
-             var itemStatus = (sender as CheckBox).DataContext as Status;
-             foreach (var itemSt in App.DB.Product.Where(p => p.Status.ID == itemStatus.ID))
-             {
-                 Products?.Remove(itemSt);
-             }
-             ListProduct.ItemsSource = Products;
-             ListProduct.Items.Refresh();
-         }
-         #endregion*/
+        
 
 
         private void MinBut2_MouseDown(object sender, MouseButtonEventArgs e)
@@ -253,6 +183,7 @@ namespace MarketPlacePraktuka.Pages.Salesmen
             App.DB.Product.Remove(TempProduct);
             App.DB.SaveChangesAsync();
             TempProduct = null;
+           View.Refresh();
         }
 
         private void ImangeBtn_Click(object sender, RoutedEventArgs e)
