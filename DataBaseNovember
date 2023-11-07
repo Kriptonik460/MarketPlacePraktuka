@@ -1,0 +1,284 @@
+USE [MarketPlace]
+GO
+/****** Object:  Table [dbo].[Address]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Address](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
+	[lat] [decimal](10, 6) NULL,
+	[lot] [decimal](10, 6) NULL,
+ CONSTRAINT [PK_Address] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Basket]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Basket](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Client] [int] NOT NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_Basket_1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+ CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Client]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Client](
+	[ID] [int] NOT NULL,
+	[Surname] [nvarchar](150) NULL,
+	[Name] [nvarchar](150) NULL,
+	[Patronymic] [nvarchar](150) NULL,
+	[ID_User] [int] NULL,
+	[NumberOfCreditCard] [nvarchar](16) NULL,
+	[Month] [int] NULL,
+	[Year] [int] NULL,
+	[CVV] [nvarchar](3) NULL,
+ CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Employee]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employee](
+	[ID] [int] NOT NULL,
+	[ID_User] [int] NOT NULL,
+ CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Order]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Client] [int] NOT NULL,
+	[ID_Address] [int] NOT NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PhotoProduct]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PhotoProduct](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Photo] [image] NOT NULL,
+	[ID_Product] [int] NOT NULL,
+ CONSTRAINT [PK_PhotoProduct] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+	[Characteristics] [nvarchar](max) NULL,
+	[ID_Category] [int] NOT NULL,
+	[Count] [int] NULL,
+	[Cost] [money] NOT NULL,
+	[Discount] [int] NULL,
+	[ID_Salesman] [int] NOT NULL,
+	[Removed] [bit] NOT NULL,
+	[ID_Status] [int] NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductList]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductList](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Product] [int] NOT NULL,
+	[ID_Basket] [int] NOT NULL,
+	[Count] [int] NULL,
+ CONSTRAINT [PK_ProductList] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductListOrder]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductListOrder](
+	[ID_Product] [int] NOT NULL,
+	[ID_Order] [int] NOT NULL,
+	[Count] [int] NULL,
+ CONSTRAINT [PK_ProductListOrder] PRIMARY KEY CLUSTERED 
+(
+	[ID_Product] ASC,
+	[ID_Order] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Salesman]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Salesman](
+	[ID] [int] NOT NULL,
+	[NameCompany] [nvarchar](150) NULL,
+	[Description] [nvarchar](max) NULL,
+	[DateOnMarketplace] [date] NULL,
+	[ID_User] [int] NULL,
+ CONSTRAINT [PK_Salesman] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 07.11.2023 22:57:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Login] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL,
+	[Removed] [bit] NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Basket]  WITH CHECK ADD  CONSTRAINT [FK_Basket_Client] FOREIGN KEY([ID_Client])
+REFERENCES [dbo].[Client] ([ID])
+GO
+ALTER TABLE [dbo].[Basket] CHECK CONSTRAINT [FK_Basket_Client]
+GO
+ALTER TABLE [dbo].[Client]  WITH CHECK ADD  CONSTRAINT [FK_Client_User] FOREIGN KEY([ID_User])
+REFERENCES [dbo].[User] ([ID])
+GO
+ALTER TABLE [dbo].[Client] CHECK CONSTRAINT [FK_Client_User]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_User] FOREIGN KEY([ID_User])
+REFERENCES [dbo].[User] ([ID])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_User]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Address] FOREIGN KEY([ID_Address])
+REFERENCES [dbo].[Address] ([ID])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Address]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Client] FOREIGN KEY([ID_Client])
+REFERENCES [dbo].[Client] ([ID])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Client]
+GO
+ALTER TABLE [dbo].[PhotoProduct]  WITH CHECK ADD  CONSTRAINT [FK_PhotoProduct_Product1] FOREIGN KEY([ID_Product])
+REFERENCES [dbo].[Product] ([ID])
+GO
+ALTER TABLE [dbo].[PhotoProduct] CHECK CONSTRAINT [FK_PhotoProduct_Product1]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Category1] FOREIGN KEY([ID_Category])
+REFERENCES [dbo].[Category] ([ID])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_Category1]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Salesman1] FOREIGN KEY([ID_Salesman])
+REFERENCES [dbo].[Salesman] ([ID])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_Salesman1]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Status1] FOREIGN KEY([ID_Status])
+REFERENCES [dbo].[Status] ([ID])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_Status1]
+GO
+ALTER TABLE [dbo].[ProductList]  WITH CHECK ADD  CONSTRAINT [FK_ProductList_Basket] FOREIGN KEY([ID_Basket])
+REFERENCES [dbo].[Basket] ([ID])
+GO
+ALTER TABLE [dbo].[ProductList] CHECK CONSTRAINT [FK_ProductList_Basket]
+GO
+ALTER TABLE [dbo].[ProductList]  WITH CHECK ADD  CONSTRAINT [FK_ProductList_Product] FOREIGN KEY([ID_Product])
+REFERENCES [dbo].[Product] ([ID])
+GO
+ALTER TABLE [dbo].[ProductList] CHECK CONSTRAINT [FK_ProductList_Product]
+GO
+ALTER TABLE [dbo].[ProductListOrder]  WITH CHECK ADD  CONSTRAINT [FK_ProductListOrder_Order] FOREIGN KEY([ID_Order])
+REFERENCES [dbo].[Order] ([ID])
+GO
+ALTER TABLE [dbo].[ProductListOrder] CHECK CONSTRAINT [FK_ProductListOrder_Order]
+GO
+ALTER TABLE [dbo].[ProductListOrder]  WITH CHECK ADD  CONSTRAINT [FK_ProductListOrder_Product] FOREIGN KEY([ID_Product])
+REFERENCES [dbo].[Product] ([ID])
+GO
+ALTER TABLE [dbo].[ProductListOrder] CHECK CONSTRAINT [FK_ProductListOrder_Product]
+GO
+ALTER TABLE [dbo].[Salesman]  WITH CHECK ADD  CONSTRAINT [FK_Salesman_User] FOREIGN KEY([ID_User])
+REFERENCES [dbo].[User] ([ID])
+GO
+ALTER TABLE [dbo].[Salesman] CHECK CONSTRAINT [FK_Salesman_User]
+GO
